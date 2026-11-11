@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>KAARIGAI — Atelier Admin &amp; Inventory Panel</title>
+  <link rel="icon" type="image/png" href="assets/Logo/kaarigai-logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body class="admin-body">
+  <!-- Loading Splash while verifying active admin session (keeps protected views hidden until verified) -->
+  <section id="admin-loading-screen" class="auth-stage">
+    <div class="auth-card auth-loading-card">
+      <img src="assets/Logo/kaarigai-logo.png" alt="KAARIGAI" class="auth-logo" />
+      <p class="auth-eyebrow">ATELIER MANAGEMENT CONSOLE</p>
+      <h1>Verifying Session...</h1>
+      <p class="auth-subtext">Confirming your admin authorization before loading boutique data.</p>
+    </div>
+  </section>
+
+  <!-- Main Authenticated Admin Workspace -->
+  <div id="admin-app-shell" class="admin-shell" hidden>
+    <div id="admin-sidebar-backdrop" class="sidebar-backdrop" hidden></div>
+
+    <!-- Left Navigation Sidebar -->
+    <aside id="admin-sidebar" class="admin-sidebar" aria-label="Admin Navigation">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-wrap">
+          <img src="assets/Logo/kaarigai-logo.png" alt="KAARIGAI" class="sidebar-logo-img" />
+          <div>
+            <span class="sidebar-brand-title">KAARIGAI</span>
+            <span class="sidebar-brand-tag">Atelier Admin</span>
+          </div>
+        </div>
+        <button type="button" id="admin-sidebar-close" class="sidebar-close-btn" aria-label="Close Navigation">&times;</button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button type="button" class="sidebar-nav-item is-active" data-admin-nav="dashboard">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          <span>Dashboard</span>
+        </button>
+
+        <button type="button" class="sidebar-nav-item" data-admin-nav="products">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 7.5h12l1.2 13H4.8L6 7.5z"/><path d="M9 7.5V6a3 3 0 0 1 6 0v1.5"/></svg>
+          <span>All Products</span>
+        </button>
+
+        <button type="button" class="sidebar-nav-item" data-admin-nav="add-product">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+          <span>Add New Product</span>
+        </button>
+
+        <button type="button" class="sidebar-nav-item" data-admin-nav="inventory">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>
+          <span>Inventory</span>
+        </button>
+
+        <button type="button" class="sidebar-nav-item" data-admin-nav="settings">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.6.78 1 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="index.html" target="_blank" rel="noopener noreferrer" class="sidebar-store-link">
+          View Customer Storefront &nearr;
+        </a>
+        <button type="button" id="admin-logout-btn" class="sidebar-nav-item sidebar-logout-item">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Column -->
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" id="admin-mobile-menu-btn" class="mobile-drawer-btn" aria-label="Open Navigation">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h12"/></svg>
+          </button>
+          <div>
+            <p class="topbar-eyebrow">KAARIGAI • CLOUD FIRESTORE LIVE</p>
+            <h1 id="admin-topbar-title" class="topbar-title">Admin Dashboard</h1>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <span id="admin-sync-pill" class="sync-pill sync-syncing">Syncing...</span>
+          <span id="admin-user-email-pill" class="user-pill">Admin Session</span>
+          <button type="button" id="topbar-add-product-btn" class="admin-btn admin-btn-primary admin-btn-sm">
+            + Add New Product
+          </button>
+        </div>
+      </header>
+
+      <div id="admin-temp-password-banner" class="admin-alert is-warning global-banner security-warning-banner" hidden>
+        <div>
+          <strong>Action Required: Temporary Initial Password In Use.</strong> Please change the temporary setup password immediately in <em>Settings &rarr; Security</em>.
+        </div>
+        <button type="button" id="banner-open-security-btn" class="admin-btn admin-btn-primary admin-btn-sm">
+          Change Password Now
+        </button>
+      </div>
+
+      <div id="admin-global-error-banner" class="admin-alert is-error global-banner" hidden></div>
+
+      <main class="admin-workspace">
+        <!-- ===============================================================
+             VIEW 1: DASHBOARD
+             =============================================================== -->
+        <section id="view-dashboard" class="admin-view">
+          <div id="dashboard-kpi-grid" class="kpi-grid"></div>
+
+          <div class="dashboard-panels-grid">
+            <article class="panel-card">
+              <div class="panel-card-header">
+                <div>
+                  <h3>Recently Added Products</h3>
+                  <p>Latest catalogue entries synced from Cloud Firestore</p>
+                </div>
+                <button type="button" class="text-action-btn" data-admin-nav="products">View All</button>
+              </div>
+              <div id="dash-recent-products"></div>
+            </article>
+
+            <article class="panel-card">
+              <div class="panel-card-header">
+                <div>
+                  <h3>Low Stock Alerts</h3>
+                  <p>Color &amp; size variants requiring restock attention</p>
+                </div>
+                <button type="button" class="text-action-btn" data-admin-nav="inventory">Open Inventory</button>
+              </div>
+              <div id="dash-low-stock-alerts"></div>
+            </article>
+          </div>
+
+          <article class="panel-card">
+            <div class="panel-card-header">
+              <div>
+                <h3>All Products Overview</h3>
+                <p>Live active &amp; hidden boutique products with variant counts</p>
+              </div>
+              <button type="button" class="text-action-btn" data-admin-nav="products">Manage Catalogue</button>
+            </div>
+            <div id="dash-products-overview"></div>
+          </article>
+
+          <article class="panel-card">
+            <div class="panel-card-header">
+              <div>
+                <h3>Product Stock Overview</h3>
+                <p>Aggregated inventory distribution per product across all color shades</p>
+              </div>
+              <button type="button" class="text-action-btn" data-admin-nav="inventory">Adjust Stock</button>
+            </div>
+            <div id="dash-stock-overview"></div>
+          </article>
+        </section>
+
+        <!-- ===============================================================
+             VIEW 2: ALL PRODUCTS
+             =============================================================== -->
+        <section id="view-products" class="admin-view" hidden>
+          <div class="panel-card">
+            <div class="panel-card-header">
+              <div>
+                <h3>Boutique Catalogue</h3>
+                <p>Filter, edit, toggle visibility, or organize storefront product categories</p>
+              </div>
+              <div class="editor-header-actions">
+                <button type="button" class="admin-btn admin-btn-outline admin-btn-sm" data-admin-nav="categories">
+                  Manage Categories
+                </button>
+                <button type="button" class="admin-btn admin-btn-primary admin-btn-sm" data-admin-nav="add-product">
+                  + New Product
+                </button>
+              </div>
+            </div>
+
+            <div class="filter-toolbar">
+              <input
+                type="search"
+                id="prod-filter-query"
+                class="filter-search-input"
+                placeholder="Search by product name, SKU, or color..."
+              />
+              <select id="prod-filter-category" class="filter-select" aria-label="Filter by category">
+                <option value="All">All Categories</option>
+              </select>
+              <select id="prod-filter-status" class="filter-select" aria-label="Filter by visibility">
+                <option value="All">All Status</option>
+                <option value="active">Active Only</option>
+                <option value="inactive">Inactive / Hidden</option>
+              </select>
+              <select id="prod-filter-stock" class="filter-select" aria-label="Filter by stock health">
+                <option value="All">All Stock States</option>
+                <option value="In Stock">In Stock</option>
+                <option value="Low Stock">Low Stock</option>
+                <option value="Out of Stock">Out of Stock</option>
+              </select>
+              <select id="prod-sort-select" class="filter-select" aria-label="Sort products">
+                <option value="newest">Sort: Newest</option>
+                <option value="name-asc">Sort: Name A–Z</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="stock-asc">Stock: Low to High</option>
+              </select>
+            </div>
+
+            <div class="toolbar-meta-row">
+              <span id="all-products-count">Showing 0 products</span>
+            </div>
+
+            <div id="all-products-table-wrap"></div>
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             VIEW 3: ADD / EDIT PRODUCT
+             =============================================================== -->
+        <section id="view-add-product" class="admin-view" hidden>
+          <form id="product-editor-form" class="product-editor-form" novalidate>
+            <div class="editor-header-bar">
+              <div>
+                <h2 id="product-form-heading">Add New Product</h2>
+                <p id="product-form-subheading">
+                  Create one unified product record with multiple colors, per-size stock, and curated image galleries.
+                </p>
+              </div>
+              <div class="editor-header-actions">
+                <button type="button" id="product-form-cancel-btn" class="admin-btn admin-btn-outline" hidden>
+                  Cancel Edit
+                </button>
+                <button type="button" id="product-form-reset-btn" class="admin-btn admin-btn-ghost">
+                  Reset Form
+                </button>
+              </div>
+            </div>
+
+            <div id="product-form-errors" class="admin-alert is-error" hidden></div>
+
+            <!-- Basic Product Information -->
+            <div class="panel-card">
+              <div class="panel-card-header">
+                <div>
+                  <h3>Basic Product Information</h3>
+                  <p>Stored cleanly inside one single <code>products/{productId}</code> document</p>
+                </div>
+                <label class="active-switch-pill">
+                  <input type="checkbox" id="pf-is-active" checked />
+                  <span>Active (Visible on Storefront)</span>
+                </label>
+              </div>
+
+              <div class="editor-grid-two">
+                <div class="admin-field">
+                  <label for="pf-name">Product Name <span class="req">*</span></label>
+                  <input
+                    type="text"
+                    id="pf-name"
+                    placeholder="e.g., Silk Anarkali Festive Gown"
+                    required
+                  />
+                </div>
+
+                <div class="admin-field">
+                  <label for="pf-price">Product Price (&#8377;) <span class="req">*</span></label>
+                  <input
+                    type="number"
+                    id="pf-price"
+                    min="0"
+                    step="1"
+                    placeholder="e.g., 4999"
+                    required
+                  />
+                </div>
+
+                <div class="admin-field">
+                  <div class="field-label-row">
+                    <label for="pf-category">Product Category <span class="req">*</span></label>
+                    <button type="button" id="pf-toggle-new-cat-btn" class="text-action-btn">
+                      + Create New Category
+                    </button>
+                  </div>
+                  <select id="pf-category" required></select>
+
+                  <!-- Inline Quick Category Creator -->
+                  <div id="pf-inline-cat-box" class="inline-cat-creator" hidden>
+                    <input
+                      type="text"
+                      id="pf-inline-cat-name"
+                      placeholder="New category name (e.g., Silk Sarees)"
+                    />
+                    <button type="button" id="pf-inline-cat-save-btn" class="admin-btn admin-btn-primary admin-btn-sm">
+                      Save Category
+                    </button>
+                    <button type="button" id="pf-inline-cat-cancel-btn" class="admin-btn admin-btn-ghost admin-btn-sm">
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+
+                <div class="admin-field">
+                  <div class="field-label-row">
+                    <label for="pf-sku">Product SKU (Unique) <span class="req">*</span></label>
+                    <button type="button" id="pf-sku-gen-btn" class="text-action-btn">
+                      Generate Unique SKU
+                    </button>
+                  </div>
+                  <input
+                    type="text"
+                    id="pf-sku"
+                    placeholder="e.g., KRG-DRS-001"
+                    required
+                  />
+                  <span id="pf-sku-status" class="field-hint"></span>
+                </div>
+              </div>
+
+              <div class="admin-field">
+                <label for="pf-description">Product Description <span class="req">*</span></label>
+                <textarea
+                  id="pf-description"
+                  rows="4"
+                  placeholder="Describe craftsmanship, weave, embroidery details, silhouette fit, and occasion styling..."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="editor-grid-two">
+                <div class="admin-field">
+                  <label for="pf-fabric">Fabric / Textile Specification (Optional)</label>
+                  <input
+                    type="text"
+                    id="pf-fabric"
+                    placeholder="e.g., Pure Mulberry Silk with Zari Weave"
+                  />
+                </div>
+                <div class="admin-field">
+                  <label for="pf-care">Care Instructions (Optional)</label>
+                  <input
+                    type="text"
+                    id="pf-care"
+                    placeholder="e.g., Dry clean only. Store wrapped in muslin."
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Multi-Color Variants Section -->
+            <div class="panel-card">
+              <div class="panel-card-header">
+                <div>
+                  <h3>Color Variants, Sizes, Stock &amp; Images</h3>
+                  <p>
+                    Variant #1 becomes the <strong>Default Product Color</strong> and its first image becomes the main storefront thumbnail. Click <strong>+ Add Another Color</strong> to add independent colors (Red, Black, Emerald, etc.) to the same product.
+                  </p>
+                </div>
+                <button type="button" id="add-color-variant-btn" class="admin-btn admin-btn-outline">
+                  + Add Another Color
+                </button>
+              </div>
+
+              <div class="image-policy-note">
+                <strong>Image URL Storage Note:</strong> Storefront product images use valid direct URLs (<code>https://...</code> or site-relative paths like <code>assets/products/...</code>) persisted in Firestore. Local device file uploads are intentionally omitted because no external file storage bucket service is enabled.
+              </div>
+
+              <div id="color-variants-container" class="variants-stack"></div>
+            </div>
+
+            <div class="editor-sticky-footer">
+              <p class="sticky-footer-note">Changes sync live to Cloud Firestore and appear on the customer boutique once Active.</p>
+              <button type="submit" id="product-form-submit-btn" class="admin-btn admin-btn-primary admin-btn-lg">
+                Save Product to Firestore
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ===============================================================
+             VIEW 4: CATEGORIES (Accessible from All Products & Product Editor)
+             =============================================================== -->
+        <section id="view-categories" class="admin-view" hidden>
+          <div class="editor-header-bar">
+            <div>
+              <h2>Collection Categories</h2>
+              <p>Create starter categories, rename across linked products, or clean up unused labels</p>
+            </div>
+            <button type="button" class="admin-btn admin-btn-outline admin-btn-sm" data-admin-nav="products">
+              &larr; Back to All Products
+            </button>
+          </div>
+          <div class="categories-layout">
+            <article class="panel-card">
+              <div class="panel-card-header">
+                <div>
+                  <h3>Create Category</h3>
+                  <p>Organize Sarees, Kurtis, Dresses, Shirts, Lehengas, Western Wear, Accessories, or custom collections</p>
+                </div>
+                <button type="button" id="seed-categories-btn" class="admin-btn admin-btn-outline admin-btn-sm">
+                  Seed Starter Categories
+                </button>
+              </div>
+
+              <form id="create-category-form" class="category-create-form" novalidate>
+                <div class="admin-field">
+                  <label for="cat-new-name">Category Name <span class="req">*</span></label>
+                  <input type="text" id="cat-new-name" placeholder="e.g., Sarees" required />
+                </div>
+                <div class="admin-field">
+                  <label for="cat-new-desc">Description (Optional)</label>
+                  <input type="text" id="cat-new-desc" placeholder="Short editorial subtitle..." />
+                </div>
+                <button type="submit" class="admin-btn admin-btn-primary">
+                  Save Category
+                </button>
+              </form>
+            </article>
+
+            <article class="panel-card">
+              <div class="panel-card-header">
+                <div>
+                  <h3>Existing Categories</h3>
+                  <p>Rename safely across linked products or remove unused categories</p>
+                </div>
+              </div>
+              <div id="categories-list-wrap"></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             VIEW 5: INVENTORY / STOCK
+             =============================================================== -->
+        <section id="view-inventory" class="admin-view" hidden>
+          <div class="panel-card">
+            <div class="panel-card-header">
+              <div>
+                <h3>Inventory &amp; Per-Size Stock Matrix</h3>
+                <p>Edit stock quantities per Product &rarr; Color &rarr; Size and save directly to Firestore</p>
+              </div>
+              <div id="inventory-summary-bar" class="summary-pills-row"></div>
+            </div>
+
+            <div class="filter-toolbar">
+              <input
+                type="search"
+                id="inv-filter-query"
+                class="filter-search-input"
+                placeholder="Search SKU, product, color, or size..."
+              />
+              <select id="inv-filter-category" class="filter-select" aria-label="Filter inventory by category">
+                <option value="All">All Categories</option>
+              </select>
+              <select id="inv-filter-product" class="filter-select" aria-label="Filter inventory by product">
+                <option value="All">All Products</option>
+              </select>
+              <select id="inv-filter-stock" class="filter-select" aria-label="Filter by stock status">
+                <option value="All">All Stock Statuses</option>
+                <option value="In Stock">In Stock</option>
+                <option value="Low Stock">Low Stock</option>
+                <option value="Out of Stock">Out of Stock</option>
+              </select>
+              <button type="button" id="inventory-save-dirty-btn" class="admin-btn admin-btn-primary" hidden>
+                Save All Changes
+              </button>
+            </div>
+
+            <div id="inventory-table-wrap"></div>
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             VIEW 6: SETTINGS (A. CONTACT DETAILS  |  B. SECURITY)
+             =============================================================== -->
+        <section id="view-settings" class="admin-view" hidden>
+          <div class="settings-tabs-bar" role="tablist" aria-label="Settings Categories">
+            <button
+              type="button"
+              role="tab"
+              aria-selected="true"
+              class="settings-tab-btn is-active"
+              data-settings-tab="contact"
+            >
+              A. Contact Details
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              class="settings-tab-btn"
+              data-settings-tab="security"
+            >
+              B. Security
+            </button>
+          </div>
+
+          <!-- =============================================================
+               SETTINGS CATEGORY A: CONTACT DETAILS
+               ============================================================= -->
+          <div id="settings-panel-contact" class="settings-tab-panel">
+            <div class="contact-settings-layout">
+              <article class="panel-card">
+                <div class="panel-card-header">
+                  <div>
+                    <h3>Boutique Contact Details</h3>
+                    <p>Saved in Cloud Firestore <code>settings/contact</code> and synced automatically to your public Contact section &amp; Footer</p>
+                  </div>
+                </div>
+
+                <div id="contact-role-readonly-banner" class="admin-alert is-warning" hidden>
+                  Read-only preview: Only the <strong>Primary Admin</strong> can modify Boutique Contact Details or Store Thresholds.
+                </div>
+                <div id="contact-form-errors" class="admin-alert is-error" hidden></div>
+
+                <form id="admin-contact-form" class="contact-settings-form" novalidate>
+                  <div class="contact-form-section-title">Boutique Identity &amp; Address</div>
+                  <div class="editor-grid-two">
+                    <div class="admin-field">
+                      <label for="ct-boutique-name">Boutique Name <span class="req">*</span></label>
+                      <input type="text" id="ct-boutique-name" placeholder="e.g., KAARIGAI Flagship Boutique" required />
+                    </div>
+                    <div class="admin-field">
+                      <label for="ct-business-name">Business Name <span class="req">*</span></label>
+                      <input type="text" id="ct-business-name" placeholder="e.g., Kaarigai Clothing for Women" required />
+                    </div>
+                  </div>
+
+                  <div class="admin-field">
+                    <label for="ct-full-address">Full Address <span class="req">*</span></label>
+                    <textarea id="ct-full-address" rows="2" placeholder="Door No., Floor, Building, Street, Landmark" required></textarea>
+                  </div>
+
+                  <div class="editor-grid-three">
+                    <div class="admin-field">
+                      <label for="ct-city">City <span class="req">*</span></label>
+                      <input type="text" id="ct-city" placeholder="e.g., Manapparai" required />
+                    </div>
+                    <div class="admin-field">
+                      <label for="ct-state">State <span class="req">*</span></label>
+                      <input type="text" id="ct-state" placeholder="e.g., Tamil Nadu" required />
+                    </div>
+                    <div class="admin-field">
+                      <label for="ct-pin-code">PIN Code <span class="req">*</span></label>
+                      <input type="text" id="ct-pin-code" maxlength="6" inputmode="numeric" placeholder="e.g., 621306" required />
+                    </div>
+                  </div>
+
+                  <div class="admin-field">
+                    <label for="ct-google-maps-url">Google Maps Location URL</label>
+                    <input type="url" id="ct-google-maps-url" placeholder="https://maps.google.com/..." />
+                  </div>
+
+                  <div class="contact-form-section-title">Phone, Email &amp; Social Profiles</div>
+                  <div class="editor-grid-two">
+                    <div class="admin-field">
+                      <label for="ct-mobile-number">Mobile Number <span class="req">*</span></label>
+                      <input type="tel" id="ct-mobile-number" placeholder="e.g., +91 98765 43210" required />
+                    </div>
+                    <div class="admin-field">
+                      <label for="ct-whatsapp-number">WhatsApp Number</label>
+                      <input type="tel" id="ct-whatsapp-number" placeholder="e.g., +91 98765 43210" />
+                    </div>
+                  </div>
+
+                  <div class="editor-grid-two">
+                    <div class="admin-field">
+                      <label for="ct-contact-email">Contact Email</label>
+                      <input type="email" id="ct-contact-email" placeholder="e.g., boutique@kaarigai.com" />
+                    </div>
+                    <div class="admin-field">
+                      <label for="ct-instagram-username">Instagram Username</label>
+                      <input type="text" id="ct-instagram-username" placeholder="e.g., @kaarigai_boutique" />
+                    </div>
+                  </div>
+
+                  <div class="editor-grid-two">
+                    <div class="admin-field">
+                      <label for="ct-instagram-url">Instagram Profile URL</label>
+                      <input type="url" id="ct-instagram-url" placeholder="https://instagram.com/..." />
+                    </div>
+                    <div class="admin-field">
+                      <label for="ct-facebook-url">Facebook URL (Optional)</label>
+                      <input type="url" id="ct-facebook-url" placeholder="https://facebook.com/..." />
+                    </div>
+                  </div>
+
+                  <div class="contact-form-section-title">Business Hours &amp; Additional Details</div>
+                  <div class="editor-grid-three">
+                    <div class="admin-field">
+                      <label for="ct-opening-time">Business Opening Time <span class="req">*</span></label>
+                      <input type="text" id="ct-opening-time" placeholder="e.g., 9:30 AM" required />
+                    </div>
+                    <div class="admin-field">
+                      <label for="ct-closing-time">Business Closing Time <span class="req">*</span></label>
+                      <input type="text" id="ct-closing-time" placeholder="e.g., 9:30 PM" required />
+                    </div>
+                    <div class="admin-field">
+                      <label for="ct-working-days">Working Days <span class="req">*</span></label>
+                      <input type="text" id="ct-working-days" placeholder="e.g., Open Every Day" required />
+                    </div>
+                  </div>
+
+                  <div class="admin-field">
+                    <label for="ct-additional-info">Additional Contact Information</label>
+                    <textarea id="ct-additional-info" rows="2" placeholder="Optional landmark guidance, private appointment note, or festive hours..."></textarea>
+                  </div>
+
+                  <div class="contact-form-actions">
+                    <button type="button" id="preview-contact-btn" class="admin-btn admin-btn-outline">
+                      Preview Before Saving
+                    </button>
+                    <button type="submit" id="save-contact-btn" class="admin-btn admin-btn-primary">
+                      Save Contact Details
+                    </button>
+                  </div>
+                </form>
+              </article>
+
+              <div class="contact-preview-column">
+                <article id="contact-preview-panel" class="panel-card contact-preview-card">
+                  <div class="panel-card-header">
+                    <div>
+                      <h3>Live Storefront Preview</h3>
+                      <p>Review how Contact &amp; Footer details will appear to customers before saving</p>
+                    </div>
+                    <span id="contact-preview-badge" class="admin-pill pill-neutral">Draft Preview</span>
+                  </div>
+                  <div id="contact-preview-body" class="contact-preview-body"></div>
+                </article>
+
+                <article class="panel-card">
+                  <div class="panel-card-header">
+                    <div>
+                      <h3>Inventory Alert Threshold</h3>
+                      <p>Stored in Firestore <code>settings/store</code></p>
+                    </div>
+                  </div>
+                  <form id="admin-settings-form" class="settings-form" novalidate>
+                    <div class="admin-field">
+                      <label for="settings-store-name">Catalogue Display Name</label>
+                      <input type="text" id="settings-store-name" value="Kaarigai Clothing for Women" />
+                    </div>
+                    <div class="admin-field">
+                      <label for="settings-low-stock-threshold">Low Stock Alert Threshold (Units)</label>
+                      <input type="number" id="settings-low-stock-threshold" min="1" step="1" value="5" />
+                      <span class="field-hint">Sizes with 1 to N units are flagged Low Stock; 0 is Out of Stock.</span>
+                    </div>
+                    <button type="submit" class="admin-btn admin-btn-outline">
+                      Save Threshold Settings
+                    </button>
+                  </form>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <!-- =============================================================
+               SETTINGS CATEGORY B: SECURITY
+               ============================================================= -->
+          <div id="settings-panel-security" class="settings-tab-panel" hidden>
+            <div class="settings-grid">
+              <!-- A. Change Own Password -->
+              <article class="panel-card">
+                <div class="panel-card-header">
+                  <div>
+                    <h3>A. Change Password</h3>
+                    <p>Validate your current password and update your administrator credentials in Firebase Authentication</p>
+                  </div>
+                  <span id="security-pwd-status-pill" class="admin-pill pill-success">Active</span>
+                </div>
+
+                <div id="security-pwd-error" class="admin-alert is-error" role="alert" hidden></div>
+                <div id="security-pwd-success" class="admin-alert is-success" role="status" hidden></div>
+
+                <form id="admin-change-password-form" class="settings-form" novalidate>
+                  <div class="admin-field">
+                    <label for="sec-current-password">Current Password <span class="req">*</span></label>
+                    <div class="password-input-wrap">
+                      <input
+                        type="password"
+                        id="sec-current-password"
+                        autocomplete="current-password"
+                        placeholder="Enter current password"
+                        required
+                      />
+                      <button type="button" class="password-toggle-btn" data-toggle-target="sec-current-password">
+                        Show
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="admin-field">
+                    <label for="sec-new-password">New Password <span class="req">*</span></label>
+                    <div class="password-input-wrap">
+                      <input
+                        type="password"
+                        id="sec-new-password"
+                        autocomplete="new-password"
+                        placeholder="Enter new password"
+                        required
+                      />
+                      <button type="button" class="password-toggle-btn" data-toggle-target="sec-new-password">
+                        Show
+                      </button>
+                    </div>
+                    <span class="field-hint">
+                      Supports numbers (0–9), uppercase &amp; lowercase letters (A–Z, a–z), and special characters (@, #, !, etc.).
+                    </span>
+                  </div>
+
+                  <div class="admin-field">
+                    <label for="sec-confirm-password">Confirm New Password <span class="req">*</span></label>
+                    <div class="password-input-wrap">
+                      <input
+                        type="password"
+                        id="sec-confirm-password"
+                        autocomplete="new-password"
+                        placeholder="Re-enter new password"
+                        required
+                      />
+                      <button type="button" class="password-toggle-btn" data-toggle-target="sec-confirm-password">
+                        Show
+                      </button>
+                    </div>
+                  </div>
+
+                  <button type="submit" id="sec-save-password-btn" class="admin-btn admin-btn-primary">
+                    Save Password
+                  </button>
+                </form>
+              </article>
+
+              <!-- Active Session Metadata -->
+              <article class="panel-card">
+                <div class="panel-card-header">
+                  <div>
+                    <h3>Active Session &amp; Role Authorization</h3>
+                    <p>Live Firebase Authentication custom claims &amp; administrator status</p>
+                  </div>
+                </div>
+
+                <dl class="session-meta-list">
+                  <div><dt>Administrator Name</dt><dd id="settings-admin-name">-</dd></div>
+                  <div><dt>Role</dt><dd id="settings-admin-role">-</dd></div>
+                  <div><dt>Session UID</dt><dd><code id="settings-admin-uid">-</code></dd></div>
+                  <div><dt>Authorization Method</dt><dd id="settings-auth-method">-</dd></div>
+                  <div><dt>Firebase Project</dt><dd id="settings-project-id">-</dd></div>
+                  <div><dt>Profile Updated</dt><dd id="settings-pwd-updated">-</dd></div>
+                </dl>
+              </article>
+            </div>
+
+            <!-- B. Admin Members (Primary Admin Only) -->
+            <article id="security-members-section" class="panel-card" hidden>
+              <div class="panel-card-header">
+                <div>
+                  <h3>B. Admin Members</h3>
+                  <p>Manage boutique administrators powered by Firebase Authentication &amp; Custom Role Claims</p>
+                </div>
+                <button type="button" id="open-add-member-btn" class="admin-btn admin-btn-primary admin-btn-sm">
+                  + Add Member
+                </button>
+              </div>
+
+              <div id="members-error-banner" class="admin-alert is-error" role="alert" hidden></div>
+              <div id="members-success-banner" class="admin-alert is-success" role="status" hidden></div>
+
+              <!-- Collapsible Add Member Form -->
+              <div id="add-member-panel" class="add-member-panel" hidden>
+                <div class="add-member-header">
+                  <div>
+                    <h4>Add New Admin Member</h4>
+                    <p>Create an administrator account with access to Dashboard, Products, Categories, and Inventory.</p>
+                  </div>
+                  <button type="button" id="cancel-add-member-btn" class="admin-btn admin-btn-ghost admin-btn-sm">
+                    Cancel
+                  </button>
+                </div>
+
+                <div id="add-member-form-error" class="admin-alert is-error" role="alert" hidden></div>
+
+                <form id="add-member-form" class="add-member-form" novalidate>
+                  <div class="editor-grid-three">
+                    <div class="admin-field">
+                      <label for="add-member-name">Admin Name <span class="req">*</span></label>
+                      <input
+                        type="text"
+                        id="add-member-name"
+                        autocomplete="off"
+                        placeholder="e.g., Rohith"
+                        required
+                      />
+                    </div>
+
+                    <div class="admin-field">
+                      <label for="add-member-password">Password <span class="req">*</span></label>
+                      <div class="password-input-wrap">
+                        <input
+                          type="password"
+                          id="add-member-password"
+                          autocomplete="new-password"
+                          placeholder="Create member password"
+                          required
+                        />
+                        <button type="button" class="password-toggle-btn" data-toggle-target="add-member-password">
+                          Show
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="admin-field">
+                      <label for="add-member-confirm">Confirm Password <span class="req">*</span></label>
+                      <div class="password-input-wrap">
+                        <input
+                          type="password"
+                          id="add-member-confirm"
+                          autocomplete="new-password"
+                          placeholder="Confirm password"
+                          required
+                        />
+                        <button type="button" class="password-toggle-btn" data-toggle-target="add-member-confirm">
+                          Show
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="add-member-actions">
+                    <button type="submit" id="add-member-submit-btn" class="admin-btn admin-btn-primary">
+                      Create Member
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <div id="admin-members-table-wrap"></div>
+            </article>
+
+            <!-- Info note when an ordinary Admin Member opens Security -->
+            <div id="security-member-role-note" class="admin-alert is-warning" hidden>
+              You are signed in as an <strong>Admin Member</strong>. Only the <strong>Primary Admin</strong> can add, rename, reset passwords for, or remove other administrator accounts.
+            </div>
+
+            <article id="security-rules-card" class="panel-card">
+              <div class="panel-card-header">
+                <div>
+                  <h3>Firestore Security Rules Reference (<code>firestore.rules</code>)</h3>
+                  <p>Enforces Firebase custom role claims across <code>products</code>, <code>categories</code>, <code>settings</code>, and <code>adminUsers</code>, and blocks all client access to server credentials</p>
+                </div>
+                <button type="button" id="copy-rules-btn" class="admin-btn admin-btn-outline admin-btn-sm">
+                  Copy Rules
+                </button>
+              </div>
+              <pre id="settings-rules-pre" class="rules-code-block"></pre>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Edit Member Name Modal -->
+  <div id="member-rename-modal" class="admin-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="member-rename-title" hidden>
+    <div class="admin-modal-backdrop" data-close-member-rename></div>
+    <div class="admin-modal-card">
+      <h3 id="member-rename-title">Edit Admin Name</h3>
+      <p>Update administrator display name and synchronized internal authentication mapping.</p>
+      <div id="edit-member-name-error" class="admin-alert is-error" role="alert" hidden></div>
+      <form id="edit-member-name-form" class="settings-form" novalidate>
+        <div class="admin-field">
+          <label for="edit-member-name-input">New Admin Name <span class="req">*</span></label>
+          <input type="text" id="edit-member-name-input" placeholder="Enter updated admin name" required />
+        </div>
+        <div class="admin-modal-actions">
+          <button type="button" class="admin-btn admin-btn-outline" data-close-member-rename>Cancel</button>
+          <button type="submit" id="edit-member-name-save-btn" class="admin-btn admin-btn-primary">Save Name</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Change Member Password Modal -->
+  <div id="member-password-modal" class="admin-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="member-password-title" hidden>
+    <div class="admin-modal-backdrop" data-close-member-password></div>
+    <div class="admin-modal-card">
+      <h3 id="member-password-title">Change Member Password</h3>
+      <p id="member-password-subtitle">Set a new password in Firebase Authentication for this administrator.</p>
+      <div id="edit-member-pwd-error" class="admin-alert is-error" role="alert" hidden></div>
+      <form id="edit-member-pwd-form" class="settings-form" novalidate>
+        <div class="admin-field">
+          <label for="edit-member-pwd-input">New Password <span class="req">*</span></label>
+          <div class="password-input-wrap">
+            <input type="password" id="edit-member-pwd-input" autocomplete="new-password" placeholder="Enter new password" required />
+            <button type="button" class="password-toggle-btn" data-toggle-target="edit-member-pwd-input">Show</button>
+          </div>
+        </div>
+        <div class="admin-field">
+          <label for="edit-member-pwd-confirm-input">Confirm New Password <span class="req">*</span></label>
+          <div class="password-input-wrap">
+            <input type="password" id="edit-member-pwd-confirm-input" autocomplete="new-password" placeholder="Confirm new password" required />
+            <button type="button" class="password-toggle-btn" data-toggle-target="edit-member-pwd-confirm-input">Show</button>
+          </div>
+        </div>
+        <div class="admin-modal-actions">
+          <button type="button" class="admin-btn admin-btn-outline" data-close-member-password>Cancel</button>
+          <button type="submit" id="edit-member-pwd-save-btn" class="admin-btn admin-btn-primary">Update Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirmation Dialog Modal -->
+  <div id="admin-confirm-modal" class="admin-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title" hidden>
+    <div class="admin-modal-backdrop" data-close-confirm></div>
+    <div class="admin-modal-card">
+      <h3 id="confirm-modal-title">Confirm Action</h3>
+      <p id="confirm-modal-message"></p>
+      <div class="admin-modal-actions">
+        <button type="button" class="admin-btn admin-btn-outline" data-close-confirm>Cancel</button>
+        <button type="button" id="confirm-modal-ok" class="admin-btn admin-btn-danger">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="admin-toast-container" class="admin-toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script type="module" src="js/admin/admin-app.js"></script>
+</body>
+</html>
+

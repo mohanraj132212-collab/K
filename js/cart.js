@@ -70,27 +70,39 @@
     if (!product) return null;
     const opts = options || {};
     const size = opts.size || (product.sizes && product.sizes[0]) || 'Standard';
-    const color =
-      opts.color ||
-      (product.colors && product.colors[0] ? product.colors[0].name : 'Signature');
-    const qty = Math.max(1, parseInt(opts.quantity, 10) || 1);
+    const firstColorName =
+      product.defaultColor ||
+      (product.colors && product.colors[0] ? product.colors[0].colorName || product.colors[0].name : 'Signature');
+    const color = opts.color || firstColorName;
+    const maxCap =
+      typeof opts.maxStock === 'number' && opts.maxStock > 0
+        ? Math.min(20, opts.maxStock)
+        : 20;
+    const qty = Math.min(maxCap, Math.max(1, parseInt(opts.quantity, 10) || 1));
+    const unitPrice = Number(product.price ?? product.samplePrice ?? 0) || 0;
+    const chosenImg =
+      opts.image || product.defaultImage || (product.images && product.images[0]) || '';
     const key = buildLineKey(product.id, size, color);
 
     const existing = cartItems.find((item) => item.key === key);
     if (existing) {
-      existing.quantity = Math.min(20, existing.quantity + qty);
+      existing.quantity = Math.min(maxCap, existing.quantity + qty);
+      existing.unitPrice = unitPrice;
+      if (chosenImg) existing.image = chosenImg;
+      if (typeof opts.maxStock === 'number') existing.maxStock = opts.maxStock;
     } else {
       cartItems.push({
         key: key,
         id: product.id,
+        sku: opts.sku || product.sku || '',
         name: product.name,
         category: product.category,
-        image: product.images && product.images[0] ? product.images[0] : '',
-        unitPrice: product.samplePrice,
+        image: chosenImg,
+        unitPrice: unitPrice,
         size: size,
         color: color,
         quantity: qty,
-        isSampleDemo: true
+        maxStock: typeof opts.maxStock === 'number' ? opts.maxStock : null
       });
     }
 
@@ -99,15 +111,22 @@
     return key;
   }
 
-  function updateQuantity(lineKey, nextQty) {
+  function updateQuantity(lineKey, nextQty, maxAllowed) {
     const idx = cartItems.findIndex((item) => item.key === lineKey);
     if (idx === -1) return;
 
     const parsed = parseInt(nextQty, 10);
+    const cap =
+      typeof maxAllowed === 'number' && maxAllowed > 0
+        ? Math.min(20, maxAllowed)
+        : typeof cartItems[idx].maxStock === 'number' && cartItems[idx].maxStock > 0
+        ? Math.min(20, cartItems[idx].maxStock)
+        : 20;
+
     if (!parsed || parsed <= 0) {
       cartItems.splice(idx, 1);
     } else {
-      cartItems[idx].quantity = Math.min(20, parsed);
+      cartItems[idx].quantity = Math.min(cap, parsed);
     }
 
     safeWrite(STORAGE_KEYS.CART, cartItems);
@@ -192,7 +211,7 @@
         referenceId: referenceCode,
         store: {
           businessName: 'Kaarigai Clothing for Women',
-          branch: 'Manapparai Flagship'
+          branch: 'Boutique Flagship'
         },
         customer: {
           name: (customerData.name || '').trim(),

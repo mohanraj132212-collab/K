@@ -1,0 +1,115 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function adminProfileExists() {
+      return isSignedIn()
+        && exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid));
+    }
+
+    function adminProfileData() {
+      return get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return isSignedIn()
+        && request.auth.token.admin == true
+        && request.auth.token.role in ['primary_admin', 'admin_member', 'Admin', 'Workers']
+        && adminProfileExists()
+        && adminProfileData().get('isActive', false) == true
+        && adminProfileData().get('role', '') in ['primary_admin', 'admin_member', 'Admin', 'Workers']
+        && adminProfileData().get('sessionVersion', -1) == request.auth.token.get('sessionVersion', -1);
+    }
+
+    function isPrimaryAdmin() {
+      return isAdmin()
+        && request.auth.token.role in ['primary_admin', 'Admin']
+        && adminProfileData().get('role', '') in ['primary_admin', 'Admin'];
+    }
+
+    function isValidProductPayload(data) {
+      return data.keys().hasAll([
+          'productId',
+          'name',
+          'price',
+          'description',
+          'category',
+          'sku',
+          'defaultColor',
+          'defaultImage',
+          'colors',
+          'isActive'
+        ])
+        && data.productId is string
+        && data.name is string && data.name.size() >= 2
+        && data.price is number && data.price >= 0
+        && data.description is string && data.description.size() >= 1
+        && data.category is string && data.category.size() >= 1
+        && data.sku is string && data.sku.size() >= 2
+        && data.defaultColor is string && data.defaultColor.size() >= 1
+        && data.defaultImage is string && data.defaultImage.size() >= 1
+        && data.colors is list && data.colors.size() >= 1
+        && data.isActive is bool;
+    }
+
+    // Products: Public read for active products; Admins & Workers manage catalogue & stock; Admin only delete
+    match /products/{productId} {
+      allow read: if resource.data.isActive == true || isAdmin();
+      allow create: if isAdmin() && isValidProductPayload(request.resource.data);
+      allow update: if isAdmin() && isValidProductPayload(request.resource.data);
+      allow delete: if isPrimaryAdmin();
+    }
+
+    // Categories: Public read for storefront filters; Admins & Workers add/update; Admin only delete
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow create, update: if isAdmin();
+      allow delete: if isPrimaryAdmin();
+    }
+
+    // Server-side password hashes, internal emails, & one-time bootstrap flags: strictly server-only
+    match /adminCredentials/{uid} {
+      allow read, write: if false;
+    }
+
+    match /settings/adminSecurity {
+      allow read, write: if false;
+    }
+
+    match /settings/adminBootstrap {
+      allow read, write: if false;
+    }
+
+    // Storefront settings ('contact', 'store', 'public'): public read; ONLY Primary Admin may edit
+    match /settings/{settingId} {
+      allow read: if settingId in ['store', 'public', 'contact'] || (settingId == 'security' && isAdmin());
+      allow write: if isPrimaryAdmin() && (settingId in ['store', 'public', 'contact']);
+    }
+
+    // Admin user profiles (no passwords or emails): member reads own doc, Primary Admin reads all; server writes only
+    match /adminUsers/{uid} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isPrimaryAdmin());
+      allow write: if false;
+    }
+
+    // Legacy / internal admin allowlist doc: self-read only, server writes only
+    match /admins/{uid} {
+      allow read: if isSignedIn() && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    // Legacy secret collection defense-in-depth
+    match /adminSecrets/{docId} {
+      allow read, write: if false;
+    }
+
+    // Deny all other collections by default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

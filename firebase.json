@@ -1,0 +1,50 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "test"
+      ]
+    }
+  ],
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "functions/**",
+      "firestore.rules",
+      "firestore.indexes.json",
+      "README.md"
+    ],
+    "rewrites": [
+      {
+        "source": "/api/adminLogin",
+        "function": "adminLogin"
+      },
+      {
+        "source": "/api/adminChangePassword",
+        "function": "adminChangePassword"
+      },
+      {
+        "source": "/api/adminMembers",
+        "function": "adminMembers"
+      },
+      {
+        "source": "/api/adminCreateUser",
+        "function": "adminCreateUser"
+      }
+    ]
+  }
+}
+

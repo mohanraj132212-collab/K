@@ -588,6 +588,7 @@ ul {
   top: 0;
   width: 100%;
   height: 100vh;
+  height: 100svh;
   height: 100dvh;
   min-height: 540px;
   overflow: hidden;
@@ -651,64 +652,115 @@ ul {
   will-change: opacity, transform;
 }
 
+.hero-bg-slideshow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--bg-ivory);
+}
+
+.hero-bg-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  opacity: 0;
+  filter: blur(2.5px);
+  transform: scale(1.06);
+  transition: opacity 1.15s ease-in-out;
+  will-change: opacity;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-bg-slide.is-leaving {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hero-bg-slide.is-active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.hero-bg-cream-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(248, 245, 239, 0.72) 0%,
+      rgba(246, 239, 227, 0.62) 48%,
+      rgba(243, 234, 219, 0.72) 100%
+    );
+}
+
 .hero-lighting-wash {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
     /* Gentle radial halo directly behind KAARIGAI heading */
     radial-gradient(
-      ellipse 42% 30% at 46% 42%,
-      rgba(255, 253, 248, 0.92) 0%,
-      rgba(235, 212, 168, 0.36) 44%,
-      rgba(198, 166, 107, 0.11) 68%,
-      rgba(248, 245, 239, 0) 82%
+      ellipse 44% 32% at 42% 43%,
+      rgba(255, 253, 248, 0.62) 0%,
+      rgba(235, 212, 168, 0.24) 48%,
+      rgba(198, 166, 107, 0.08) 70%,
+      rgba(248, 245, 239, 0) 84%
     ),
     /* Warm champagne spotlight behind right-side couture gown */
     radial-gradient(
       ellipse 31% 50% at 77% 46%,
-      rgba(255, 251, 242, 0.88) 0%,
-      rgba(218, 186, 128, 0.28) 42%,
-      rgba(198, 166, 107, 0.1) 65%,
-      rgba(248, 245, 239, 0) 82%
+      rgba(255, 251, 242, 0.56) 0%,
+      rgba(218, 186, 128, 0.2) 45%,
+      rgba(198, 166, 107, 0.08) 68%,
+      rgba(248, 245, 239, 0) 84%
     ),
     /* Soft outer champagne-beige warmth */
     radial-gradient(
       ellipse 72% 68% at 50% 50%,
       rgba(248, 245, 239, 0) 56%,
-      rgba(229, 213, 184, 0.26) 100%
+      rgba(229, 213, 184, 0.24) 100%
     ),
     linear-gradient(
       132deg,
-      rgba(235, 223, 200, 0.44) 0%,
+      rgba(235, 223, 200, 0.34) 0%,
       rgba(248, 245, 239, 0) 38%,
       rgba(248, 245, 239, 0) 64%,
-      rgba(230, 215, 188, 0.46) 100%
+      rgba(230, 215, 188, 0.36) 100%
     );
 }
 
 .hero-silk-sheen {
   position: absolute;
   inset: -6%;
-  opacity: 0.82;
+  z-index: 1;
+  opacity: 0.65;
   background:
     radial-gradient(
       ellipse 68% 22% at 62% 28%,
-      rgba(255, 254, 250, 0.56) 0%,
-      rgba(245, 235, 216, 0.14) 55%,
+      rgba(255, 254, 250, 0.42) 0%,
+      rgba(245, 235, 216, 0.1) 55%,
       transparent 78%
     ),
     repeating-linear-gradient(
       118deg,
       rgba(255, 253, 249, 0) 0px,
-      rgba(255, 253, 249, 0.42) 85px,
-      rgba(233, 217, 188, 0.16) 165px,
+      rgba(255, 253, 249, 0.34) 85px,
+      rgba(233, 217, 188, 0.14) 165px,
       rgba(248, 245, 239, 0) 275px
     ),
     repeating-linear-gradient(
       152deg,
       rgba(248, 245, 239, 0) 0px,
       rgba(198, 166, 107, 0.045) 110px,
-      rgba(255, 252, 246, 0.26) 210px,
+      rgba(255, 252, 246, 0.22) 210px,
       rgba(248, 245, 239, 0) 340px
     );
   -webkit-mask-image: radial-gradient(ellipse 84% 82% at 50% 48%, #000 35%, transparent 98%);
@@ -718,7 +770,8 @@ ul {
 .hero-silk-weave {
   position: absolute;
   inset: 0;
-  opacity: 0.5;
+  z-index: 1;
+  opacity: 0.42;
   background-image:
     repeating-linear-gradient(
       90deg,
@@ -741,6 +794,7 @@ ul {
 .hero-ornamental-svg {
   position: absolute;
   inset: 0;
+  z-index: 2;
   width: 100%;
   height: 100%;
 }
@@ -795,6 +849,13 @@ ul {
   color: var(--primary-brown);
   text-shadow: 0 18px 40px rgba(56, 37, 31, 0.06);
   user-select: none;
+}
+
+@media (min-width: 768px) {
+  .hero-brand-wordmark {
+    position: relative;
+    left: calc(-1 * clamp(122px, 14.8vw, 208px));
+  }
 }
 
 .hero-lower-copy {
@@ -1125,20 +1186,25 @@ ul {
 
   .hero-luxury-backdrop {
     bottom: auto;
-    height: 88vh;
+    height: 100vh;
+    height: 100svh;
+    height: 100dvh;
+    min-height: 540px;
   }
 
   .hero-layer {
     position: relative;
     inset: auto;
-    min-height: 88vh;
-    padding-top: calc(var(--header-height) + 2rem);
-    padding-bottom: 3rem;
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+    padding-top: var(--header-height);
+    padding-bottom: 0;
     justify-content: center;
   }
 
   .hero-center-band {
-    margin-top: -6vh;
+    margin-top: -13vh;
   }
 
   .dress-flight-anchor {
@@ -1147,7 +1213,10 @@ ul {
     left: 0;
     right: 0;
     bottom: auto;
-    height: 88vh;
+    height: 100vh;
+    height: 100svh;
+    height: 100dvh;
+    min-height: 540px;
     justify-content: flex-end;
     padding-right: clamp(1rem, 6vw, 5.5rem);
     padding-top: var(--header-height);
@@ -1156,7 +1225,8 @@ ul {
   .about-layer {
     position: relative;
     inset: auto;
-    padding-block: 4rem 2rem;
+    padding-top: calc(var(--header-height) + 2.5rem);
+    padding-bottom: 2.5rem;
   }
 
   .pedestal-static-dress {
@@ -1172,17 +1242,26 @@ ul {
 
 @media (prefers-reduced-motion: reduce) and (max-width: 767px) {
   .hero-luxury-backdrop {
-    height: 620px;
-  }
-
-  .hero-layer {
+    height: 100vh;
+    height: 100svh;
+    height: 100dvh;
     min-height: 620px;
   }
 
+  .hero-layer {
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+
   .dress-flight-anchor {
-    height: 620px;
-    align-items: flex-end;
-    padding-bottom: 3rem;
+    height: 100vh;
+    height: 100svh;
+    height: 100dvh;
+    min-height: 620px;
+    align-items: center;
+    padding-top: var(--header-height);
+    padding-bottom: 12vh;
     padding-right: 0.8rem;
   }
 
@@ -1820,6 +1899,28 @@ ul {
   color: var(--text-muted);
 }
 
+.contact-inline-link {
+  color: var(--primary-brown);
+  text-decoration: underline;
+  text-decoration-color: rgba(198, 166, 107, 0.55);
+  text-underline-offset: 3px;
+  font-weight: 500;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.contact-inline-link:hover {
+  color: var(--accent-gold-dark);
+  text-decoration-color: var(--accent-gold-dark);
+}
+
+.contact-social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.15rem;
+  font-size: 0.86rem;
+}
+
 .store-action-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -1946,6 +2047,7 @@ ul {
 .footer-logo-img {
   height: 46px;
   width: auto;
+  mix-blend-mode: multiply;
 }
 
 .footer-tagline {
@@ -2014,6 +2116,25 @@ ul {
   margin-bottom: 0.75rem;
 }
 
+.footer-contact-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.82rem;
+  color: rgba(248, 245, 239, 0.76);
+}
+
+.footer-contact-meta a {
+  color: rgba(248, 245, 239, 0.88);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-contact-meta a:hover {
+  color: var(--accent-gold);
+}
+
 .footer-map-link {
   display: inline-flex;
   align-items: center;
@@ -2036,6 +2157,29 @@ ul {
   gap: 0.75rem;
   font-size: 0.78rem;
   color: rgba(248, 245, 239, 0.65);
+}
+
+.footer-admin-sep {
+  margin-inline: 0.45rem;
+  opacity: 0.5;
+}
+
+.footer-admin-link {
+  color: rgba(248, 245, 239, 0.72);
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: color 0.22s ease;
+}
+
+.footer-admin-link:hover,
+.footer-admin-link:focus-visible {
+  color: var(--accent-gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* ==========================================================================
@@ -2989,25 +3133,29 @@ ul {
     bottom: 12px;
   }
 
+  .hero-bg-slide {
+    filter: blur(2px);
+  }
+
   .hero-lighting-wash {
     background:
       radial-gradient(
         ellipse 66% 24% at 50% 21%,
-        rgba(255, 253, 248, 0.92) 0%,
-        rgba(241, 228, 200, 0.34) 48%,
+        rgba(255, 253, 248, 0.62) 0%,
+        rgba(241, 228, 200, 0.24) 48%,
         rgba(248, 245, 239, 0) 80%
       ),
       radial-gradient(
         ellipse 58% 36% at 68% 43%,
-        rgba(255, 251, 242, 0.88) 0%,
-        rgba(220, 190, 134, 0.24) 48%,
+        rgba(255, 251, 242, 0.56) 0%,
+        rgba(220, 190, 134, 0.18) 48%,
         rgba(248, 245, 239, 0) 82%
       ),
       linear-gradient(
         135deg,
-        rgba(235, 223, 200, 0.38) 0%,
+        rgba(235, 223, 200, 0.28) 0%,
         rgba(248, 245, 239, 0) 45%,
-        rgba(230, 215, 188, 0.38) 100%
+        rgba(230, 215, 188, 0.28) 100%
       );
   }
 
@@ -3120,5 +3268,143 @@ ul {
   .icon-svg {
     width: 18px;
     height: 18px;
+  }
+}
+
+/* ==========================================================================
+   LIVE FIRESTORE STOCK BADGES, DISABLED OUT-OF-STOCK VARIANTS & SKELETONS
+   ========================================================================== */
+
+[hidden] {
+  display: none !important;
+}
+
+.pd-meta-left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.pd-sku-chip {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 0.16rem 0.55rem;
+  border-radius: 4px;
+  background: var(--bg-ivory-soft);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-muted);
+}
+
+.product-stock-pill,
+.pd-stock-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.product-stock-pill.is-in-stock,
+.pd-stock-badge.is-in-stock {
+  background: #eaf6ef;
+  color: #1f6b47;
+}
+
+.product-stock-pill.is-low-stock,
+.pd-stock-badge.is-low-stock {
+  background: #fef4e3;
+  color: #9a5d0e;
+}
+
+.product-stock-pill.is-out-of-stock,
+.pd-stock-badge.is-out-of-stock {
+  background: #fdecec;
+  color: #9f2d2d;
+}
+
+.product-badge.is-out-pill {
+  background: rgba(159, 45, 45, 0.92);
+  color: #ffffff;
+}
+
+.size-chip-mini.is-out-of-stock,
+.size-chip-mini:disabled,
+.pd-size-btn.is-out-of-stock,
+.pd-size-btn:disabled {
+  opacity: 0.52;
+  text-decoration: line-through;
+  background: var(--bg-ivory-soft);
+  color: var(--text-muted);
+  border-style: dashed;
+  cursor: not-allowed;
+}
+
+.size-out-tag {
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 0.2rem;
+}
+
+.card-add-btn:disabled,
+.btn:disabled,
+.qty-btn:disabled {
+  opacity: 0.52;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.card-add-btn:disabled {
+  background-color: #7c716c;
+}
+
+.product-skeleton-card {
+  background: var(--bg-ivory-card);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.skeleton-media {
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(90deg, #ede5d8 25%, #f5f0e7 50%, #ede5d8 75%);
+  background-size: 200% 100%;
+  animation: krgShimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.skeleton-line {
+  height: 14px;
+  border-radius: 6px;
+  background: #ebe2d4;
+}
+
+.skeleton-line.short {
+  width: 38%;
+  height: 10px;
+}
+
+.skeleton-line.mid {
+  width: 65%;
+}
+
+@keyframes krgShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
   }
 }

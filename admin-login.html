@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>KAARIGAI — Admin Login</title>
+  <link rel="icon" type="image/png" href="assets/Logo/kaarigai-logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body class="admin-body">
+  <!-- Session Verification Splash (Prevents unauthorized flash before check completes) -->
+  <section id="login-checking-screen" class="auth-stage">
+    <div class="auth-card auth-loading-card">
+      <img src="assets/Logo/kaarigai-logo.png" alt="KAARIGAI" class="auth-logo" />
+      <p class="auth-eyebrow">ATELIER MANAGEMENT CONSOLE</p>
+      <h1>Checking Session...</h1>
+      <p class="auth-subtext">Verifying active admin session securely.</p>
+    </div>
+  </section>
+
+  <!-- Multi-Admin Name + Password Login Screen -->
+  <main id="admin-login-screen" class="auth-stage" hidden>
+    <div class="auth-card">
+      <img src="assets/Logo/kaarigai-logo.png" alt="KAARIGAI" class="auth-logo" />
+      <p class="auth-eyebrow">ATELIER ADMINISTRATION</p>
+      <h1>Admin Access</h1>
+      <p class="auth-subtext">
+        Sign in with your username and password to manage boutique products, inventory, and studio operations.
+      </p>
+
+      <div id="admin-login-error" class="admin-alert is-error" role="alert" hidden></div>
+
+      <form id="admin-login-form" class="auth-form" novalidate>
+        <div class="admin-field">
+          <label for="admin-login-username">Username</label>
+          <input
+            type="text"
+            id="admin-login-username"
+            name="username"
+            autocomplete="username"
+            placeholder="Enter username"
+            required
+          />
+        </div>
+
+        <div class="admin-field">
+          <label for="admin-login-password">Password</label>
+          <div class="password-input-wrap">
+            <input
+              type="password"
+              id="admin-login-password"
+              name="password"
+              autocomplete="current-password"
+              placeholder="Enter password"
+              required
+            />
+            <button
+              type="button"
+              id="admin-toggle-password"
+              class="password-toggle-btn"
+              aria-label="Show or hide password"
+            >
+              Show
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="admin-login-submit" class="admin-btn admin-btn-primary admin-btn-full">
+          <span id="admin-login-spinner" class="btn-spinner" hidden aria-hidden="true"></span>
+          <span id="admin-login-btn-label">Login</span>
+        </button>
+      </form>
+
+      <div class="auth-footer-note">
+        <p>
+          Protected by Firebase Authentication, custom role authorization, and strict Firestore Security Rules.
+        </p>
+        <a href="index.html" class="auth-back-link">&larr; Back to Customer Storefront</a>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/admin/admin-login.js"></script>
+</body>
+</html>

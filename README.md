@@ -15,9 +15,10 @@ C:\Users\mohan\Desktop\k\
 │   ├── animations.js   # GSAP ScrollTrigger right-to-left 3D dress choreography & reveals
 │   └── main.js         # Storefront UI controller, product gallery modal & checkout flow
 ├── assets/
-│   ├── images/         # Transparent signature couture dress & boutique interior imagery
-│   ├── products/       # Multi-angle editorial & detail imagery for all 12 sample products
-│   └── logo/           # Original KAARIGAI logo + alpha-masked transparent PNG
+│   ├── Logo/           # Primary KAARIGAI logo + secondary crest logo
+│   ├── images/
+│   │   └── Homepage/   # Atelier story, hero background slides, & signature couture dress
+│   └── products/       # Multi-angle editorial & detail imagery for all 12 sample products
 └── README.md
 ```
 

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>KAARIGAI — Create Admin &amp; Worker Account</title>
+  <link rel="icon" type="image/png" href="assets/Logo/kaarigai-logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body class="admin-body">
+  <!-- Session Verification Splash -->
+  <section id="cu-checking-screen" class="auth-stage">
+    <div class="auth-card auth-loading-card">
+      <img src="assets/Logo/kaarigai-logo.png" alt="KAARIGAI" class="auth-logo" />
+      <p class="auth-eyebrow">ACCOUNT PROVISIONING</p>
+      <h1>Checking Authorization...</h1>
+      <p class="auth-subtext">Verifying setup administrator credentials before loading user provisioning.</p>
+    </div>
+  </section>
+
+  <!-- Gate 1: Setup Administrator Login (Prevents public access) -->
+  <main id="cu-auth-gate" class="auth-stage" hidden>
+    <div class="auth-card">
+      <img src="assets/Logo/kaarigai-logo.png" alt="KAARIGAI" class="auth-logo" />
+      <p class="auth-eyebrow">AUTHORIZED SETUP ACCESS</p>
+      <h1>Setup Admin Sign In</h1>
+      <p class="auth-subtext">
+        Only an authorized setup administrator can create Admin or Workers accounts. Sign in to unlock user creation.
+      </p>
+
+      <div id="cu-gate-error" class="admin-alert is-error" role="alert" hidden></div>
+
+      <form id="cu-gate-form" class="auth-form" novalidate>
+        <div class="admin-field">
+          <label for="cu-gate-username">Setup Admin Username</label>
+          <input
+            type="text"
+            id="cu-gate-username"
+            name="username"
+            autocomplete="username"
+            placeholder="Enter authorized Admin username"
+            required
+          />
+        </div>
+
+        <div class="admin-field">
+          <label for="cu-gate-password">Password</label>
+          <div class="password-input-wrap">
+            <input
+              type="password"
+              id="cu-gate-password"
+              name="password"
+              autocomplete="current-password"
+              placeholder="Enter password"
+              required
+            />
+            <button
+              type="button"
+              id="cu-gate-toggle-pwd"
+              class="password-toggle-btn"
+              aria-label="Show or hide setup password"
+            >
+              Show
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="cu-gate-submit" class="admin-btn admin-btn-primary admin-btn-full">
+          <span id="cu-gate-spinner" class="btn-spinner" hidden aria-hidden="true"></span>
+          <span id="cu-gate-btn-label">Verify &amp; Continue</span>
+        </button>
+      </form>
+
+      <div class="auth-footer-note">
+        <p>Protected by Firebase Cloud Functions, custom claims, and strict Firestore Security Rules.</p>
+        <div class="cu-footer-links">
+          <a href="admin-login.html" class="auth-back-link">Go to Admin Login</a>
+          <a href="index.html" class="auth-back-link">&larr; Storefront</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Gate 2: Non-Admin (Workers) Restricted View -->
+  <main id="cu-restricted-screen" class="auth-stage" hidden>
+    <div class="auth-card">
+      <img src="assets/Logo/kaarigai-logo.png" alt="KAARIGAI" class="auth-logo" />
+      <p class="auth-eyebrow">ACCESS RESTRICTED</p>
+      <h1>Admin Authorization Required</h1>
+      <p class="auth-subtext">
+        You are signed in as <strong id="cu-restricted-identity">Workers</strong>. Only an authorized <strong>Admin</strong> account can create users or assign roles.
+      </p>
+
+      <div class="cu-session-actions" style="justify-content:center; margin-top: 1.25rem; flex-wrap: wrap;">
+        <a href="admin.html" class="admin-btn admin-btn-primary">Open Dashboard</a>
+        <button type="button" id="cu-restricted-logout-btn" class="admin-btn admin-btn-outline">
+          Sign Out &amp; Switch Account
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Authenticated Admin View: Standalone Create User Form -->
+  <main id="cu-main-screen" class="auth-stage" hidden>
+    <div class="auth-card auth-setup-card">
+      <img src="assets/Logo/kaarigai-logo.png" alt="KAARIGAI" class="auth-logo" />
+      <p class="auth-eyebrow">ATELIER ACCOUNT PROVISIONING</p>
+      <h1>Create User Account</h1>
+      <p class="auth-subtext" style="text-align:center;">
+        Create Firebase Authentication &amp; Firestore profiles for boutique Admins and Workers.
+      </p>
+
+      <div class="cu-session-bar">
+        <div class="cu-session-identity">
+          <strong id="cu-active-username">Admin</strong>
+          <span id="cu-active-role-pill" class="admin-pill pill-gold">Admin</span>
+        </div>
+        <div class="cu-session-actions">
+          <a href="admin.html" class="admin-btn admin-btn-outline admin-btn-xs">Dashboard</a>
+          <button type="button" id="cu-logout-btn" class="admin-btn admin-btn-ghost admin-btn-xs">Logout</button>
+        </div>
+      </div>
+
+      <div id="cu-error-box" class="admin-alert is-error" role="alert" hidden></div>
+      <div id="cu-success-box" class="admin-alert is-success" role="status" hidden></div>
+
+      <form id="create-user-form" class="auth-form" novalidate>
+        <div class="admin-field">
+          <label for="cu-username">Username <span class="req">*</span></label>
+          <input
+            type="text"
+            id="cu-username"
+            name="username"
+            autocomplete="off"
+            placeholder="Enter username (e.g., Mohan123 or Worker1)"
+            required
+          />
+        </div>
+
+        <div class="admin-field">
+          <label for="cu-password">Password <span class="req">*</span></label>
+          <div class="password-input-wrap">
+            <input
+              type="password"
+              id="cu-password"
+              name="password"
+              autocomplete="new-password"
+              placeholder="Enter password"
+              required
+            />
+            <button
+              type="button"
+              id="cu-toggle-pwd"
+              class="password-toggle-btn"
+              aria-label="Show or hide password"
+            >
+              Show
+            </button>
+          </div>
+          <span class="field-hint">
+            Verified securely on the server via cryptographic hashing. Never stored in plaintext.
+          </span>
+        </div>
+
+        <div class="admin-field">
+          <label for="cu-role">Role <span class="req">*</span></label>
+          <select id="cu-role" name="role" required>
+            <option value="Admin">Admin</option>
+            <option value="Workers">Workers</option>
+          </select>
+        </div>
+
+        <button type="submit" id="cu-submit-btn" class="admin-btn admin-btn-primary admin-btn-full">
+          <span id="cu-submit-spinner" class="btn-spinner" hidden aria-hidden="true"></span>
+          <span id="cu-submit-label">Submit</span>
+        </button>
+      </form>
+
+      <div class="auth-footer-note">
+        <p>
+          Internal authentication emails and cryptographic credentials remain exclusively server-side. Firestore stores only <code>username</code>, <code>role</code>, and <code>createdAt</code> under <code>adminUsers/{uid}</code>.
+        </p>
+        <div class="cu-footer-links">
+          <a href="admin-login.html" class="auth-back-link">Go to Admin Login</a>
+          <a href="index.html" class="auth-back-link">&larr; Back to Storefront</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/admin/create-user.js"></script>
+</body>
+</html>
+

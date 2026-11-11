@@ -8,7 +8,7 @@
     content="KAARIGAI – Clothing for Women in Manapparai, Tamil Nadu. Luxury Indian women's fashion featuring Silk Sarees, Kurtis, Designer Dresses, Tops, and Ethnic Couture."
   />
   <title>KAARIGAI — Clothing for Women | Elegance Woven in Every Thread</title>
-  <link rel="icon" type="image/png" href="assets/logo/kaarigai-logo.png" />
+  <link rel="icon" type="image/png" href="assets/Logo/kaarigai-logo.png" />
 
   <!-- Google Fonts: Luxury Editorial Serif + Refined Geometric Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,7 +18,8 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
   />
-  <link rel="preload" as="image" href="assets/images/hero-dress.png" />
+  <link rel="preload" as="image" href="assets/images/Homepage/Dress/hero-dress.png" />
+  <link rel="preload" as="image" href="assets/images/Homepage/Background/hero-slide-1.png" />
   <link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" crossorigin />
   <link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" crossorigin />
 
@@ -35,7 +36,7 @@
     <div class="header-inner container">
       <a href="#home" class="brand-logo-link" aria-label="KAARIGAI – Clothing for Women Home">
         <img
-          src="assets/logo/kaarigai-logo.png"
+          src="assets/Logo/kaarigai-logo.png"
           alt="KAARIGAI – Designing Elegance"
           class="brand-logo-img"
         />
@@ -169,7 +170,7 @@
   >
     <div class="mobile-nav-header">
       <img
-        src="assets/logo/kaarigai-logo.png"
+        src="assets/Logo/kaarigai-logo.png"
         alt="KAARIGAI"
         class="mobile-nav-logo"
       />
@@ -196,18 +197,18 @@
     <div class="mobile-nav-categories">
       <p class="mobile-nav-eyebrow">Quick Categories</p>
       <div class="mobile-cat-grid">
-        <button type="button" class="mobile-cat-chip" data-quick-cat="New Arrivals">New Arrivals</button>
         <button type="button" class="mobile-cat-chip" data-quick-cat="Sarees">Sarees</button>
         <button type="button" class="mobile-cat-chip" data-quick-cat="Kurtis">Kurtis</button>
         <button type="button" class="mobile-cat-chip" data-quick-cat="Dresses">Dresses</button>
-        <button type="button" class="mobile-cat-chip" data-quick-cat="Tops">Tops</button>
-        <button type="button" class="mobile-cat-chip" data-quick-cat="Ethnic Wear">Ethnic Wear</button>
+        <button type="button" class="mobile-cat-chip" data-quick-cat="Shirts">Shirts</button>
+        <button type="button" class="mobile-cat-chip" data-quick-cat="Lehengas">Lehengas</button>
+        <button type="button" class="mobile-cat-chip" data-quick-cat="Western Wear">Western Wear</button>
       </div>
     </div>
 
     <div class="mobile-nav-footer">
-      <p class="mobile-store-label">Kaarigai Clothing for Women</p>
-      <p class="mobile-store-meta">Manapparai, Tamil Nadu • Open Daily 9:30 AM – 9:30 PM</p>
+      <p class="mobile-store-label" id="mobile-store-label">KAARIGAI Boutique</p>
+      <p class="mobile-store-meta" id="mobile-store-meta">Live boutique hours &amp; location sync automatically.</p>
     </div>
   </aside>
 
@@ -231,8 +232,34 @@
           <div class="stage-aura stage-aura-right"></div>
           <div class="stage-aura stage-aura-left"></div>
 
-          <!-- First-Page Luxury Couture Background (Champagne Lighting, Silk Texture & Indian Ornamental Filigree) -->
+          <!-- First-Page Luxury Couture Background (Blurred Fashion Slideshow, Champagne Lighting & Ornamental Filigree) -->
           <div class="hero-luxury-backdrop" id="hero-luxury-backdrop">
+            <div class="hero-bg-slideshow" id="hero-bg-slideshow">
+              <img
+                src="assets/images/Homepage/Background/hero-slide-1.png"
+                alt=""
+                class="hero-bg-slide is-active"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+              />
+              <img
+                src="assets/images/Homepage/Background/hero-slide-2.png"
+                alt=""
+                class="hero-bg-slide"
+                loading="eager"
+                decoding="async"
+              />
+              <img
+                src="assets/images/Homepage/Background/hero-slide-3.png"
+                alt=""
+                class="hero-bg-slide"
+                loading="eager"
+                decoding="async"
+              />
+              <div class="hero-bg-cream-veil"></div>
+            </div>
+
             <div class="hero-lighting-wash"></div>
             <div class="hero-silk-sheen"></div>
             <div class="hero-silk-weave"></div>
@@ -548,7 +575,7 @@
               <div class="about-pedestal-frame" id="about-pedestal">
                 <div class="pedestal-arch"></div>
                 <img
-                  src="assets/images/hero-dress.png"
+                  src="assets/images/Homepage/Dress/hero-dress.png"
                   alt="KAARIGAI Couture Gown"
                   class="pedestal-static-dress"
                   width="832"
@@ -607,7 +634,7 @@
         <div class="dress-flight-anchor" id="dress-flight-anchor">
           <div class="dress-3d-tilt" id="dress-3d-tilt">
             <img
-              src="assets/images/hero-dress.png"
+              src="assets/images/Homepage/Dress/hero-dress.png"
               alt="KAARIGAI Champagne Gold and Ivory Embroidered Silk Couture Gown"
               class="signature-dress-img"
               id="signature-dress-img"
@@ -636,14 +663,6 @@
           </p>
         </div>
 
-        <!-- Explicit Sample Data / Demo Inventory Disclosure -->
-        <div class="demo-notice-banner reveal-on-scroll" role="note">
-          <span class="demo-pill">Sample Demo Catalogue</span>
-          <p>
-            Featured styles, sample INR pricing, sizes, and colour options are curated demo placeholders awaiting final store inventory from Kaarigai Clothing for Women.
-          </p>
-        </div>
-
         <!-- Interactive Category & Filter Bar -->
         <div class="collection-toolbar reveal-on-scroll">
           <div
@@ -652,7 +671,7 @@
             role="tablist"
             aria-label="Product Categories"
           >
-            <!-- Rendered cleanly by main.js from KAARIGAI_CATALOG.CATEGORIES -->
+            <!-- Rendered dynamically from Cloud Firestore -->
           </div>
 
           <div class="collection-controls">
@@ -665,7 +684,7 @@
                 type="search"
                 id="collection-search-input"
                 class="collection-search-input"
-                placeholder="Filter by style or fabric..."
+                placeholder="Filter by style, SKU, or colour..."
                 aria-label="Filter collection products"
               />
             </div>
@@ -686,25 +705,25 @@
             <select id="collection-sort-select" class="collection-sort-select">
               <option value="featured">Sort: Featured</option>
               <option value="newest">Sort: New Arrivals</option>
-              <option value="price-asc">Sample Price: Low to High</option>
-              <option value="price-desc">Sample Price: High to Low</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
             </select>
           </div>
         </div>
 
         <div class="results-meta-bar">
-          <span id="results-count-label">Showing 12 curated sample pieces</span>
+          <span id="results-count-label">Connecting to live boutique catalogue...</span>
         </div>
 
         <!-- Product Cards Grid -->
         <div class="products-grid" id="products-grid">
-          <!-- Populated dynamically by main.js -->
+          <!-- Populated dynamically by main.js from Cloud Firestore -->
         </div>
 
-        <!-- Empty Search / Filter State -->
+        <!-- Empty Search / Filter / Sync State -->
         <div class="empty-results-state" id="empty-results-state" hidden>
-          <h3>No matching garments found</h3>
-          <p>Try clearing your filter or switching categories to view our full curated showcase.</p>
+          <h3 id="empty-results-title">No matching garments found</h3>
+          <p id="empty-results-desc">Try clearing your filter or switching categories to view our full curated showcase.</p>
           <button type="button" class="btn btn-primary" id="reset-filters-btn">
             Show All Collections
           </button>
@@ -729,8 +748,8 @@
         </div>
         <div class="atelier-band-card reveal-on-scroll">
           <span class="atelier-num">03</span>
-          <h3>Manapparai Styling</h3>
-          <p>Visit our flagship boutique near Kamarajar Silai for personal drape guidance and in-store collection previews daily.</p>
+          <h3>Personal Styling</h3>
+          <p>Experience personal drape guidance, bespoke blouse pairing, and unhurried in-store collection previews.</p>
         </div>
       </div>
     </section>
@@ -743,36 +762,36 @@
         <div class="section-header-row reveal-on-scroll">
           <div>
             <p class="section-eyebrow">VISIT THE BOUTIQUE</p>
-            <h2 class="section-title">Kaarigai Clothing for Women</h2>
+            <h2 class="section-title" id="contact-boutique-heading">KAARIGAI Boutique</h2>
           </div>
           <p class="section-subtitle">
-            Experience our collections in person at our Manapparai flagship store or send a styling enquiry below.
+            Experience our collections in person at our showroom or send a personal styling enquiry below.
           </p>
         </div>
 
         <div class="contact-split-grid">
-          <!-- Left: Store Image + Official Store Details -->
+          <!-- Left: Store Image + Live Firestore Store Details -->
           <div class="store-info-card reveal-on-scroll">
             <div class="store-photo-wrap parallax-frame">
               <img
-                src="assets/images/atelier-story.jpg"
-                alt="Interior of Kaarigai Clothing for Women boutique featuring draped silk sarees and brass racks"
+                src="assets/images/Homepage/atelier-story.jpg"
+                alt="Interior of KAARIGAI boutique featuring draped silk sarees and brass racks"
                 class="store-photo"
                 loading="lazy"
               />
-              <span class="store-photo-badge">Manapparai Flagship</span>
+              <span class="store-photo-badge" id="contact-card-badge">Flagship Boutique</span>
             </div>
 
             <div class="store-details-body">
               <div class="store-about-block">
-                <h3>About the Store</h3>
-                <p>
-                  Welcome to <strong>Kaarigai Clothing for Women</strong> — a warm, attentive womenswear destination bringing together classic Tamil Nadu weaves, festive occasionwear, and effortless everyday silhouettes under one roof.
+                <h3 id="contact-business-heading">About the Store</h3>
+                <p id="contact-about-copy">
+                  Welcome to <strong id="contact-business-name">our atelier</strong> — a warm, attentive womenswear destination bringing together classic Indian weaves, festive occasionwear, and effortless everyday silhouettes under one roof.
                 </p>
               </div>
 
               <div class="store-meta-list">
-                <div class="store-meta-item">
+                <div class="store-meta-item" id="contact-address-item">
                   <span class="meta-icon-wrap" aria-hidden="true">
                     <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 1 1 13 0c0 5.4-6.5 11-6.5 11z" />
@@ -781,13 +800,11 @@
                   </span>
                   <div>
                     <strong>Boutique Address</strong>
-                    <p>
-                      1st Floor, PPS Palamudir Cholai, Kovilpatti Rd, near Kamarajar Silai, Manapparai, Tamil Nadu 621306
-                    </p>
+                    <p id="contact-address-text">Loading boutique address from live settings...</p>
                   </div>
                 </div>
 
-                <div class="store-meta-item">
+                <div class="store-meta-item" id="contact-hours-item">
                   <span class="meta-icon-wrap" aria-hidden="true">
                     <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                       <circle cx="12" cy="12" r="9" />
@@ -796,11 +813,23 @@
                   </span>
                   <div>
                     <strong>Opening Hours</strong>
-                    <p>9:30 AM – 9:30 PM, every day</p>
+                    <p id="contact-hours-text">Loading boutique hours...</p>
                   </div>
                 </div>
 
-                <div class="store-meta-item">
+                <div class="store-meta-item" id="contact-mobile-item" hidden>
+                  <span class="meta-icon-wrap" aria-hidden="true">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <strong>Boutique Phone</strong>
+                    <p><a id="contact-mobile-link" class="contact-inline-link" href="#"></a></p>
+                  </div>
+                </div>
+
+                <div class="store-meta-item" id="contact-whatsapp-item">
                   <span class="meta-icon-wrap" aria-hidden="true">
                     <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M20.5 11.8a8.5 8.5 0 0 1-12.5 7.5L4 20.5l1.2-3.9A8.5 8.5 0 1 1 20.5 11.8z" />
@@ -808,18 +837,60 @@
                     </svg>
                   </span>
                   <div>
-                    <strong>WhatsApp Concierge (Placeholder)</strong>
-                    <p>Direct WhatsApp number pending store connection — click below to preview a boutique enquiry message.</p>
+                    <strong>WhatsApp Concierge</strong>
+                    <p id="contact-whatsapp-text">Connecting WhatsApp concierge details...</p>
+                  </div>
+                </div>
+
+                <div class="store-meta-item" id="contact-email-item" hidden>
+                  <span class="meta-icon-wrap" aria-hidden="true">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="5" width="18" height="14" rx="2" />
+                      <path d="M3 7l9 6 9-6" />
+                    </svg>
+                  </span>
+                  <div>
+                    <strong>Email</strong>
+                    <p><a id="contact-email-link" class="contact-inline-link" href="#"></a></p>
+                  </div>
+                </div>
+
+                <div class="store-meta-item" id="contact-social-item" hidden>
+                  <span class="meta-icon-wrap" aria-hidden="true">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="5" />
+                      <circle cx="12" cy="12" r="4" />
+                      <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
+                    </svg>
+                  </span>
+                  <div>
+                    <strong>Social Channels</strong>
+                    <div id="contact-social-links" class="contact-social-links"></div>
+                  </div>
+                </div>
+
+                <div class="store-meta-item" id="contact-additional-item" hidden>
+                  <span class="meta-icon-wrap" aria-hidden="true">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M12 11v5M12 8h.01" />
+                    </svg>
+                  </span>
+                  <div>
+                    <strong>Boutique Note</strong>
+                    <p id="contact-additional-text"></p>
                   </div>
                 </div>
               </div>
 
               <div class="store-action-buttons">
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=1st+Floor+PPS+Palamudir+Cholai+Kovilpatti+Rd+near+Kamarajar+Silai+Manapparai+Tamil+Nadu+621306"
+                  id="contact-maps-btn"
+                  href="#"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="btn btn-primary"
+                  hidden
                 >
                   <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 1 1 13 0c0 5.4-6.5 11-6.5 11z" />
@@ -834,13 +905,14 @@
 
                 <button
                   type="button"
+                  id="contact-whatsapp-btn"
                   class="btn btn-outline whatsapp-placeholder-trigger"
                 >
                   <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M20.5 11.8a8.5 8.5 0 0 1-12.5 7.5L4 20.5l1.2-3.9A8.5 8.5 0 1 1 20.5 11.8z" />
                     <path d="M9.3 8.8c.2-.5.5-.5.8-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.2.1.5-.1.7l-.5.6c-.1.1-.2.3-.1.5.4.8 1.2 1.6 2 2 .2.1.4 0 .5-.1l.6-.5c.2-.2.5-.2.7-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3 0 .6-.5.8-.5.2-1.5.4-3.1-.3-1.6-.7-3.4-2.5-4.1-4.1-.7-1.6-.5-2.6-.3-3.1z" />
                   </svg>
-                  <span>WhatsApp Placeholder</span>
+                  <span id="contact-whatsapp-btn-label">WhatsApp Boutique</span>
                 </button>
               </div>
             </div>
@@ -908,7 +980,7 @@
               </button>
 
               <p class="form-helper-note">
-                No phone number is invented or transmitted to an external server in this frontend showcase.
+                Enquiry details are formatted locally for your personal visit or boutique conversation.
               </p>
 
               <div class="form-feedback-box" id="contact-form-feedback" hidden></div>
@@ -927,7 +999,7 @@
       <div class="footer-brand-col">
         <div class="footer-logo-medallion">
           <img
-            src="assets/logo/kaarigai-logo.png"
+            src="assets/Logo/logo.jpg"
             alt="KAARIGAI – Designing Elegance"
             class="footer-logo-img"
           />
@@ -936,24 +1008,27 @@
           Elegance Woven in Every Thread. Curated Indian women’s clothing crafted for modern grace.
         </p>
         <div class="footer-socials">
-          <button
-            type="button"
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
             class="social-icon-pill"
             id="footer-instagram-btn"
-            aria-label="KAARIGAI Instagram Placeholder"
+            aria-label="KAARIGAI Instagram"
           >
             <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="3" y="3" width="18" height="18" rx="5" />
               <circle cx="12" cy="12" r="4" />
               <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
             </svg>
-            <span>Instagram</span>
-          </button>
+            <span id="footer-instagram-label">Instagram</span>
+          </a>
 
           <button
             type="button"
             class="social-icon-pill whatsapp-placeholder-trigger"
-            aria-label="KAARIGAI WhatsApp Placeholder"
+            id="footer-whatsapp-btn"
+            aria-label="KAARIGAI WhatsApp"
           >
             <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M20.5 11.8a8.5 8.5 0 0 1-12.5 7.5L4 20.5l1.2-3.9A8.5 8.5 0 1 1 20.5 11.8z" />
@@ -961,6 +1036,21 @@
             </svg>
             <span>WhatsApp</span>
           </button>
+
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon-pill"
+            id="footer-facebook-btn"
+            aria-label="KAARIGAI Facebook"
+            hidden
+          >
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+            </svg>
+            <span>Facebook</span>
+          </a>
         </div>
       </div>
 
@@ -980,27 +1070,28 @@
           <li><button type="button" class="footer-cat-link" data-quick-cat="Sarees">Silk &amp; Organza Sarees</button></li>
           <li><button type="button" class="footer-cat-link" data-quick-cat="Kurtis">Handcrafted Kurtis</button></li>
           <li><button type="button" class="footer-cat-link" data-quick-cat="Dresses">Designer Dresses</button></li>
-          <li><button type="button" class="footer-cat-link" data-quick-cat="Tops">Embroidered Tops</button></li>
-          <li><button type="button" class="footer-cat-link" data-quick-cat="Ethnic Wear">Ethnic Wear</button></li>
-          <li><button type="button" class="footer-cat-link" data-quick-cat="New Arrivals">New Arrivals</button></li>
+          <li><button type="button" class="footer-cat-link" data-quick-cat="Lehengas">Festive Lehengas</button></li>
+          <li><button type="button" class="footer-cat-link" data-quick-cat="Shirts">Tailored Shirts</button></li>
+          <li><button type="button" class="footer-cat-link" data-quick-cat="Western Wear">Western Wear</button></li>
         </ul>
       </div>
 
       <div class="footer-store-col">
-        <h4>Manapparai Boutique</h4>
-        <p class="footer-address">
-          Kaarigai Clothing for Women<br />
-          1st Floor, PPS Palamudir Cholai, Kovilpatti Rd, near Kamarajar Silai,<br />
-          Manapparai, Tamil Nadu 621306
+        <h4 id="footer-store-heading">Boutique Location</h4>
+        <p class="footer-address" id="footer-address">
+          Boutique contact &amp; location details load automatically from Admin Settings.
         </p>
-        <p class="footer-hours">
-          <strong>Hours:</strong> 9:30 AM – 9:30 PM, Every Day
+        <p class="footer-hours" id="footer-hours">
+          <strong>Hours:</strong> <span id="footer-hours-text">Synced from Cloud Firestore</span>
         </p>
+        <div class="footer-contact-meta" id="footer-contact-meta" hidden></div>
         <a
-          href="https://www.google.com/maps/search/?api=1&query=1st+Floor+PPS+Palamudir+Cholai+Kovilpatti+Rd+near+Kamarajar+Silai+Manapparai+Tamil+Nadu+621306"
+          id="footer-map-link"
+          href="#"
           target="_blank"
           rel="noopener noreferrer"
           class="footer-map-link"
+          hidden
         >
           <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 1 1 13 0c0 5.4-6.5 11-6.5 11z" />
@@ -1013,8 +1104,8 @@
 
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
-        <p>&copy; <span id="footer-year">2026</span> Kaarigai Clothing for Women. All rights reserved.</p>
-        <p class="footer-demo-note">Sample showcase catalogue &amp; Firebase-ready frontend demo.</p>
+        <p>&copy; <span id="footer-year">2026</span> <span id="footer-copyright-name">KAARIGAI</span>. All rights reserved.</p>
+        <p class="footer-demo-note">Curated Atelier Collections &bull; Live Inventory Showcase. <span class="footer-admin-sep" aria-hidden="true">&bull;</span> <a href="admin-login.html" id="footer-admin-link" class="footer-admin-link">Admin</a></p>
       </div>
     </div>
   </footer>
@@ -1052,7 +1143,7 @@
     <div class="drawer-footer" id="cart-drawer-footer">
       <div class="cart-totals-rows">
         <div class="cart-total-row">
-          <span>Sample Subtotal</span>
+          <span>Subtotal</span>
           <strong id="cart-subtotal-val">₹0</strong>
         </div>
         <div class="cart-total-row subtle">
@@ -1066,7 +1157,7 @@
       </div>
 
       <p class="cart-demo-disclaimer">
-        Sample prices shown. Final billing &amp; stock confirmation occur upon store/backend integration.
+        Final billing &amp; stock reservation are confirmed by Kaarigai Clothing for Women.
       </p>
 
       <div class="drawer-actions-stack">
@@ -1153,7 +1244,10 @@
         <!-- Product Configuration & Info -->
         <div class="pd-info">
           <div class="pd-top-row">
-            <span class="pd-category" id="pd-category"></span>
+            <div class="pd-meta-left">
+              <span class="pd-category" id="pd-category"></span>
+              <span class="pd-sku-chip" id="pd-sku"></span>
+            </div>
             <button type="button" class="icon-btn pd-wishlist-btn" id="pd-wishlist-btn" aria-label="Save to Wishlist">
               <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M12 20.4s-7.5-4.8-9.3-9.3C1.4 7.8 3.6 4.5 7.1 4.5c2.1 0 3.8 1.1 4.9 2.7 1.1-1.6 2.8-2.7 4.9-2.7 3.5 0 5.7 3.3 4.4 6.6-1.8 4.5-9.3 9.3-9.3 9.3z" />
@@ -1165,14 +1259,14 @@
 
           <div class="pd-price-row">
             <span class="pd-price" id="pd-price"></span>
-            <span class="pd-price-tag">Sample Price • Demo Inventory</span>
+            <span class="pd-stock-badge" id="pd-stock-badge">In Stock</span>
           </div>
 
           <p class="pd-description" id="pd-description"></p>
 
-          <div class="pd-specs">
-            <div><strong>Fabric:</strong> <span id="pd-fabric"></span></div>
-            <div><strong>Care:</strong> <span id="pd-care"></span></div>
+          <div class="pd-specs" id="pd-specs">
+            <div id="pd-fabric-row"><strong>Fabric:</strong> <span id="pd-fabric"></span></div>
+            <div id="pd-care-row"><strong>Care:</strong> <span id="pd-care"></span></div>
           </div>
 
           <!-- Colour Selection -->
@@ -1198,8 +1292,8 @@
             <div class="pd-size-list" id="pd-size-list"></div>
 
             <div class="pd-size-guide-panel" id="pd-size-guide-panel" hidden>
-              <p><strong>Sample Indian Women's Sizing Reference (Inches):</strong></p>
-              <p>XS: Bust 32 • S: Bust 34 • M: Bust 36 • L: Bust 38 • XL: Bust 40. Sarees include standard 5.5m drape + 0.8m unstitched blouse fabric.</p>
+              <p><strong>KAARIGAI Indian Women's Sizing Reference (Inches):</strong></p>
+              <p>XS: Bust 32 • S: Bust 34 • M: Bust 36 • L: Bust 38 • XL: Bust 40 • XXL: Bust 42. Sarees include standard 5.5m drape + 0.8m unstitched blouse fabric.</p>
             </div>
           </div>
 
@@ -1308,11 +1402,11 @@
             <div class="form-row-two">
               <div class="form-group">
                 <label for="chk-city">City / Town <span class="req">*</span></label>
-                <input type="text" id="chk-city" required placeholder="e.g., Manapparai" />
+                <input type="text" id="chk-city" required placeholder="Enter city / town" />
               </div>
               <div class="form-group">
                 <label for="chk-pincode">Pincode <span class="req">*</span></label>
-                <input type="text" id="chk-pincode" required maxlength="6" inputmode="numeric" placeholder="621306" />
+                <input type="text" id="chk-pincode" required maxlength="6" inputmode="numeric" placeholder="6-digit PIN" />
               </div>
             </div>
 
@@ -1320,9 +1414,9 @@
               <label>Preferred Payment Method</label>
               <div class="payment-method-options">
                 <label class="radio-card">
-                  <input type="radio" name="paymentMethod" value="Pay at Boutique (Manapparai Pickup)" checked />
+                  <input type="radio" name="paymentMethod" value="Pay at Boutique (In-Store Pickup)" checked />
                   <span>
-                    <strong>Pay at Boutique (Manapparai Store)</strong>
+                    <strong>Pay at Boutique (In-Store Pickup)</strong>
                     <small>Inspect fabric &amp; complete billing in person</small>
                   </span>
                 </label>
@@ -1365,7 +1459,7 @@
 
             <div class="checkout-totals">
               <div class="cart-total-row">
-                <span>Sample Subtotal</span>
+                <span>Subtotal</span>
                 <strong id="checkout-subtotal">₹0</strong>
               </div>
               <div class="cart-total-row subtle">
@@ -1373,7 +1467,7 @@
                 <span>Pending store confirmation</span>
               </div>
               <div class="cart-total-row grand">
-                <span>Sample Estimate</span>
+                <span>Estimated Total</span>
                 <strong id="checkout-total">₹0</strong>
               </div>
             </div>
@@ -1435,7 +1529,7 @@
       <div class="story-modal-grid">
         <div class="story-modal-media">
           <img
-            src="assets/images/atelier-story.jpg"
+            src="assets/images/Homepage/atelier-story.jpg"
             alt="KAARIGAI Manapparai Luxury Boutique"
             class="story-modal-img"
           />
@@ -1446,8 +1540,8 @@
           <p>
             Derived from classic craft heritage, <strong>KAARIGAI</strong> celebrates the elegance of Indian women across generations—honoring rich handloom sarees alongside crisp everyday kurtis, breezy botanical dresses, and occasionwear.
           </p>
-          <p>
-            Located at <strong>1st Floor, PPS Palamudir Cholai, Kovilpatti Rd, near Kamarajar Silai, Manapparai</strong>, our showroom welcomes guests every day from <strong>9:30 AM to 9:30 PM</strong> with unhurried personal styling.
+          <p id="story-modal-boutique-meta">
+            Visit our showroom to experience these textiles up close with unhurried personal styling.
           </p>
           <div class="story-modal-actions">
             <a href="#collections" class="btn btn-primary" data-close-modal>
@@ -1515,16 +1609,18 @@
         In accordance with verified store data, no phone number has been fabricated. Once Kaarigai Clothing for Women links their official WhatsApp Business number, this button will launch a direct chat pre-filled with your selected pieces.
       </p>
       <div class="wa-placeholder-box">
-        <strong>Store Visit Details (Verified):</strong>
-        <p>Kaarigai Clothing for Women • 1st Floor, PPS Palamudir Cholai, Kovilpatti Rd, near Kamarajar Silai, Manapparai, Tamil Nadu 621306</p>
-        <p>Open daily: 9:30 AM – 9:30 PM</p>
+        <strong>Boutique Visit Details:</strong>
+        <p id="wa-modal-store-address">Contact details will appear here once saved in Admin Settings.</p>
+        <p id="wa-modal-store-hours"></p>
       </div>
       <div class="wa-modal-actions">
         <a
-          href="https://www.google.com/maps/search/?api=1&query=1st+Floor+PPS+Palamudir+Cholai+Kovilpatti+Rd+near+Kamarajar+Silai+Manapparai+Tamil+Nadu+621306"
+          id="wa-modal-maps-link"
+          href="#"
           target="_blank"
           rel="noopener noreferrer"
           class="btn btn-primary"
+          hidden
         >
           <span>Get Store Directions</span>
         </a>
@@ -1538,10 +1634,10 @@
   <!-- Toast Notification Region -->
   <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- Application Modules (Non-blocking; GSAP + ScrollTrigger loaded cleanly by animations.js) -->
-  <script defer src="js/products.js"></script>
-  <script defer src="js/cart.js"></script>
-  <script defer src="js/animations.js"></script>
-  <script defer src="js/main.js"></script>
+  <!-- Application Modules (GSAP + ScrollTrigger loaded cleanly by animations.js) -->
+  <script src="js/cart.js"></script>
+  <script src="js/animations.js"></script>
+  <script type="module" src="js/products.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

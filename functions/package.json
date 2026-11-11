@@ -1,0 +1,20 @@
+{
+  "name": "kaarigai-admin-functions",
+  "description": "Server-side password authentication & credential management for KAARIGAI Admin Panel",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "serve": "firebase emulators:start --only functions",
+    "deploy": "firebase deploy --only functions"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.2.0",
+    "firebase-functions": "^6.3.2"
+  }
+}
+

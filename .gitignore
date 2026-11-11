@@ -1,0 +1,18 @@
+# Dependencies & Build Outputs
+node_modules/
+functions/node_modules/
+_site/
+
+# Firebase Local & Emulators
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+auth-debug.log
+functions/.env
+functions/.runtimeconfig.json
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+
