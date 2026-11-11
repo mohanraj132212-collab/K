@@ -315,6 +315,9 @@
     if (!filtered.length) {
       dom.productsGrid.innerHTML = '';
       if (dom.emptyResults) dom.emptyResults.hidden = false;
+      if (Animations && typeof Animations.refresh === 'function') {
+        window.requestAnimationFrame(Animations.refresh);
+      }
       return;
     }
 
@@ -441,6 +444,10 @@
 
     if (shouldAnimate && Animations && typeof Animations.animateProductCards === 'function') {
       Animations.animateProductCards();
+    }
+
+    if (Animations && typeof Animations.refresh === 'function') {
+      window.requestAnimationFrame(Animations.refresh);
     }
   }
 

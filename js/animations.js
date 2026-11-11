@@ -13,8 +13,17 @@
 (function (global) {
   'use strict';
 
+  const SCRIPT_LOAD_START_MS =
+    typeof performance !== 'undefined' && typeof performance.now === 'function'
+      ? performance.now()
+      : 0;
+
   let signatureScrollTrigger = null;
+  let stickyFallbackCleanup = null;
   let stickyFallbackActive = false;
+  let fallbackRevealObserver = null;
+  let fallbackRevealScrollHandler = null;
+  let gsapStageInitialized = false;
 
   function clamp01(v) {
     return v < 0 ? 0 : v > 1 ? 1 : v;
@@ -35,8 +44,8 @@
     return -(Math.cos(Math.PI * t) - 1) / 2;
   }
 
-  function easeInOutQuad(t) {
-    return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   }
 
   /**
@@ -53,8 +62,8 @@
 
     if (!anchor || !tiltEl || !pedestal) {
       return {
-        startX: 280,
-        startY: -36,
+        startX: 250,
+        startY: -32,
         endX: -280,
         endY: 36,
         endScale: 0.75,
@@ -66,28 +75,30 @@
     const anchorRect = anchor.getBoundingClientRect();
     const pedRect = pedestal.getBoundingClientRect();
 
-    const anchorCenterX = anchorRect.left + anchorRect.width / 2;
-    const anchorCenterY = anchorRect.top + anchorRect.height / 2;
+    const stageW = anchorRect.width || window.innerWidth;
+    const stageH = anchorRect.height || window.innerHeight;
+    const anchorCenterX = stageW / 2;
+    const anchorCenterY = stageH / 2;
 
     // Untransformed dress dimensions (offsetWidth/Height ignore CSS transforms)
-    const dressW = tiltEl.offsetWidth || 360;
+    const dressW = tiltEl.offsetWidth || (isMobile ? 210 : 360);
     const naturalRatio =
       dressImg && dressImg.naturalWidth && dressImg.naturalHeight
         ? dressImg.naturalHeight / dressImg.naturalWidth
         : 1007 / 832;
     const dressH = tiltEl.offsetHeight || Math.round(dressW * naturalRatio);
 
-    // RIGHT starting position in Hero
-    const rightMargin = isMobile ? 14 : Math.max(24, anchorRect.width * 0.04);
-    const maxSafeRight = anchorRect.width / 2 - dressW / 2 - rightMargin;
-    const desiredRight = anchorRect.width * (isMobile ? 0.23 : 0.285);
+    // RIGHT starting position in Hero (positioned slightly inward toward left for refined visual balance)
+    const rightMargin = isMobile ? 16 : Math.max(24, stageW * 0.04);
+    const maxSafeRight = stageW / 2 - dressW / 2 - rightMargin;
+    const desiredRight = stageW * (isMobile ? 0.138 : 0.265);
     const startX = Math.round(
-      Math.max(isMobile ? 36 : 80, Math.min(desiredRight, maxSafeRight))
+      Math.max(isMobile ? 24 : 68, Math.min(desiredRight, maxSafeRight))
     );
 
-    // LEFT destination position measured from #about-pedestal's true geometric center
-    const pedCenterX = pedRect.left + pedRect.width / 2;
-    const pedCenterY = pedRect.top + pedRect.height / 2;
+    // LEFT destination position measured in stage-local coordinates relative to #about-pedestal's true geometric center
+    const pedCenterX = pedRect.left - anchorRect.left + pedRect.width / 2;
+    const pedCenterY = pedRect.top - anchorRect.top + pedRect.height / 2;
     const endX = Math.round(pedCenterX - anchorCenterX);
     const endY = Math.round(pedCenterY - anchorCenterY);
 
@@ -104,7 +115,7 @@
       const topLimit =
         (heroCenter ? heroCenter.offsetTop + heroCenter.offsetHeight : headerH + 110) + 12;
       const bottomLimit =
-        (heroLower ? heroLower.offsetTop : anchorRect.height - 230) - 12;
+        (heroLower ? heroLower.offsetTop : stageH - 230) - 12;
       const safeCenterY = (topLimit + bottomLimit) / 2;
       const targetCenterY = Math.min(safeCenterY, pedCenterY - 24);
       const minCenterY = topLimit + dressH / 2;
@@ -113,7 +124,7 @@
       startY = Math.round(clampedCenterY - anchorCenterY);
     } else {
       const minTopClear = headerH + 28;
-      const idealStartCenterY = headerH + (anchorRect.height - headerH) * 0.42;
+      const idealStartCenterY = headerH + (stageH - headerH) * 0.42;
       const minCenterY = minTopClear + dressH / 2;
       const maxCenterY = Math.max(minCenterY, pedCenterY - 45);
       const clampedCenterY = Math.max(minCenterY, Math.min(idealStartCenterY, maxCenterY));
@@ -138,12 +149,112 @@
     };
   }
 
+  function initFallbackReveals() {
+    const revealEls = document.querySelectorAll('.reveal-on-scroll');
+    if (!revealEls.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    function checkVisibleNow(el) {
+      const rect = el.getBoundingClientRect();
+      return rect.top <= window.innerHeight * 0.92;
+    }
+
+    function revealVisiblePending() {
+      const threshold = window.innerHeight * 0.92;
+      document.querySelectorAll('.reveal-on-scroll.reveal-pending:not(.is-revealed)').forEach(function (el) {
+        if (el.getBoundingClientRect().top <= threshold) {
+          el.classList.add('is-revealed');
+          if (fallbackRevealObserver) fallbackRevealObserver.unobserve(el);
+        }
+      });
+    }
+
+    revealEls.forEach(function (el) {
+      if (checkVisibleNow(el)) {
+        el.classList.remove('reveal-pending');
+        el.classList.add('is-revealed');
+      } else {
+        el.classList.add('reveal-pending');
+      }
+    });
+
+    if (fallbackRevealObserver) {
+      fallbackRevealObserver.disconnect();
+      fallbackRevealObserver = null;
+    }
+    if (fallbackRevealScrollHandler) {
+      window.removeEventListener('scroll', fallbackRevealScrollHandler);
+      fallbackRevealScrollHandler = null;
+    }
+
+    if ('IntersectionObserver' in window) {
+      fallbackRevealObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting || entry.boundingClientRect.top <= window.innerHeight * 0.92) {
+              entry.target.classList.add('is-revealed');
+              if (fallbackRevealObserver) fallbackRevealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -6% 0px' }
+      );
+
+      revealEls.forEach(function (el) {
+        if (!el.classList.contains('is-revealed')) {
+          fallbackRevealObserver.observe(el);
+        }
+      });
+
+      let revealRaf = null;
+      fallbackRevealScrollHandler = function () {
+        if (!stickyFallbackActive) return;
+        if (!revealRaf) {
+          revealRaf = window.requestAnimationFrame(function () {
+            revealRaf = null;
+            revealVisiblePending();
+          });
+        }
+      };
+      window.addEventListener('scroll', fallbackRevealScrollHandler, { passive: true });
+    } else {
+      revealEls.forEach(function (el) {
+        el.classList.remove('reveal-pending');
+        el.classList.add('is-revealed');
+      });
+    }
+  }
+
+  function destroyFallbackReveals() {
+    if (fallbackRevealObserver) {
+      fallbackRevealObserver.disconnect();
+      fallbackRevealObserver = null;
+    }
+    if (fallbackRevealScrollHandler) {
+      window.removeEventListener('scroll', fallbackRevealScrollHandler);
+      fallbackRevealScrollHandler = null;
+    }
+    document.querySelectorAll('.reveal-on-scroll').forEach(function (el) {
+      el.classList.remove('reveal-pending', 'is-revealed');
+    });
+  }
+
+  function destroyStickyFallback() {
+    if (stickyFallbackCleanup) {
+      stickyFallbackCleanup();
+      stickyFallbackCleanup = null;
+    }
+    stickyFallbackActive = false;
+  }
+
   /**
-   * Offline / Blocked-CDN Sticky Scroll Fallback:
-   * Preserves the exact same smooth diagonal bottom-left shrink choreography
-   * using CSS position:sticky and requestAnimationFrame if GSAP CDN is blocked.
+   * Immediate / Offline Sticky Scroll Engine:
+   * Runs from t=0ms with CSS position:sticky so scrolling works immediately while
+   * CDN scripts download, and remains full-featured if GSAP CDN is unavailable.
    */
   function initStickyFallback() {
+    if (stickyFallbackActive) return;
+
     const stage = document.getElementById('hero-about-stage');
     const heroBackdrop = document.getElementById('hero-luxury-backdrop');
     const heroCenter = document.getElementById('hero-center-band');
@@ -170,6 +281,7 @@
     }
 
     stickyFallbackActive = true;
+    stage.classList.remove('has-gsap-pin');
     stage.classList.add('is-sticky-fallback');
 
     let threadLen = 1400;
@@ -183,7 +295,7 @@
 
     function updateFrame() {
       rafId = null;
-      if (reduceQuery.matches) return;
+      if (!stickyFallbackActive || reduceQuery.matches) return;
 
       const stageRect = stage.getBoundingClientRect();
       const travel = Math.max(1, stage.offsetHeight - window.innerHeight);
@@ -220,7 +332,7 @@
 
       // Step 2: Continuous Diagonal Bottom-Left Glide & Gradual Scale-Down (0.04 -> 0.78)
       const flightT = clamp01((progress - 0.04) / 0.74);
-      const easeX = easeInOutQuad(flightT);
+      const easeX = easeInOutCubic(flightT);
       const easeY = easeInOutSine(flightT);
       const easeScale = easeInOutSine(flightT);
 
@@ -295,13 +407,42 @@
 
     window.addEventListener('scroll', onScrollOrResize, { passive: true });
     window.addEventListener('resize', onScrollOrResize);
+    initFallbackReveals();
     updateFrame();
+
+    stickyFallbackCleanup = function () {
+      window.removeEventListener('scroll', onScrollOrResize);
+      window.removeEventListener('resize', onScrollOrResize);
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      stage.classList.remove('is-sticky-fallback');
+      destroyFallbackReveals();
+      [
+        heroBackdrop,
+        heroCenter,
+        heroLower,
+        heroScrollCue,
+        dressShadow,
+        aboutPedestal,
+        pedestalArch,
+        aboutRight
+      ]
+        .concat(Array.prototype.slice.call(aboutStaggers))
+        .forEach(function (el) {
+          if (el) el.style.cssText = '';
+        });
+    };
   }
 
   function initSignatureScrollStage() {
+    if (gsapStageInitialized) return;
+
     const gsap = global.gsap;
     const ScrollTrigger = global.ScrollTrigger;
 
+    const stage = document.getElementById('hero-about-stage');
     const stagePin = document.getElementById('stage-pin');
     const heroBackdrop = document.getElementById('hero-luxury-backdrop');
     const heroCenter = document.getElementById('hero-center-band');
@@ -317,7 +458,7 @@
     const aboutStaggers = document.querySelectorAll('.about-stagger');
     const threadPath = document.getElementById('signature-thread-path');
 
-    if (!stagePin || !dressTilt) return;
+    if (!stage || !stagePin || !dressTilt) return;
 
     // Fallback smoothly if GSAP CDN did not load
     if (!gsap || !ScrollTrigger) {
@@ -325,7 +466,15 @@
       return;
     }
 
+    const preInitScrollY = window.scrollY;
+    destroyStickyFallback();
+
+    gsapStageInitialized = true;
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({
+      ignoreMobileResize: true,
+      autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load'
+    });
 
     // Prepare golden SVG thread stroke dash for scrubbed drawing
     let threadLen = 1400;
@@ -341,15 +490,24 @@
 
     // Respect user reduced-motion accessibility preference
     mm.add('(prefers-reduced-motion: reduce)', function () {
-      gsap.set([heroBackdrop, aboutPedestal, aboutRight].filter(Boolean), {
-        clearProps: 'all',
-        opacity: 1
-      });
+      stage.classList.remove('has-gsap-pin', 'is-sticky-fallback');
+      gsap.set(
+        [heroBackdrop, heroCenter, heroLower, heroScrollCue, aboutPedestal, aboutRight]
+          .concat(Array.prototype.slice.call(aboutStaggers))
+          .filter(Boolean),
+        {
+          clearProps: 'all',
+          opacity: 1
+        }
+      );
       if (aboutRight) aboutRight.classList.add('is-interactive');
       gsap.set(dressTilt, { clearProps: 'all' });
     });
 
     function buildMotionStage() {
+      stage.classList.remove('is-sticky-fallback');
+      stage.classList.add('has-gsap-pin');
+
       const geo = computeDressGeometry();
 
       // Set initial RIGHT-side Hero resting pose
@@ -411,14 +569,18 @@
         }
       }
 
-      // Subtle entrance reveal only when landing at top of page
+      // Subtle entrance reveal only when CDN was ready fast at top of page (avoid late flash)
       let introTl = null;
+      const elapsedMs =
+        typeof performance !== 'undefined' && typeof performance.now === 'function'
+          ? performance.now() - SCRIPT_LOAD_START_MS
+          : 0;
       const heroLowerChildren = heroLower ? Array.prototype.slice.call(heroLower.children) : [];
-      if (window.scrollY <= 30) {
+      if (window.scrollY <= 15 && elapsedMs < 900) {
         introTl = gsap.timeline({
           defaults: { ease: 'power3.out' },
           onComplete: function () {
-            if (window.scrollY <= 30) {
+            if (window.scrollY <= 15) {
               startFloat();
             }
           }
@@ -434,6 +596,9 @@
           );
       } else {
         gsap.set(dressImg, { opacity: 1, scale: 1, y: 0 });
+        if (window.scrollY <= 15) {
+          startFloat();
+        }
       }
 
       // Signature Hero -> Diagonal Bottom-Left Shrink -> Heritage Frame Timeline
@@ -677,6 +842,7 @@
         }
         if (floatTween) floatTween.kill();
         if (introTl) introTl.kill();
+        stage.classList.remove('has-gsap-pin');
         signatureScrollTrigger = null;
       };
     }
@@ -684,6 +850,19 @@
     // Separate desktop & mobile contexts so viewport changes rebuild exact offsets cleanly
     mm.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)', buildMotionStage);
     mm.add('(max-width: 767px) and (prefers-reduced-motion: no-preference)', buildMotionStage);
+
+    // Ensure scroll position stays locked during fallback -> GSAP handoff
+    if (preInitScrollY > 2 && Math.abs(window.scrollY - preInitScrollY) > 2) {
+      window.scrollTo(0, preInitScrollY);
+    }
+    ScrollTrigger.update();
+
+    if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === 'function') {
+      document.fonts.ready.then(refresh);
+    }
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', refresh, { once: true });
+    }
   }
 
   function initSectionRevealsAndParallax() {
@@ -691,19 +870,37 @@
     const ScrollTrigger = global.ScrollTrigger;
     if (!gsap || !ScrollTrigger) return;
 
+    destroyFallbackReveals();
+
     const mm = gsap.matchMedia();
     mm.add('(prefers-reduced-motion: no-preference)', function () {
       gsap.utils.toArray('.reveal-on-scroll').forEach(function (el) {
-        gsap.from(el, {
-          y: 28,
-          opacity: 0,
-          duration: 0.75,
-          ease: 'power2.out',
-          clearProps: 'transform,opacity',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 86%',
-            once: true
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.92) {
+          gsap.set(el, { clearProps: 'transform,opacity' });
+          return;
+        }
+
+        gsap.set(el, { y: 26, opacity: 0 });
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top 90%',
+          once: true,
+          onEnter: function () {
+            gsap.to(el, {
+              y: 0,
+              opacity: 1,
+              duration: 0.72,
+              ease: 'power2.out',
+              clearProps: 'transform,opacity',
+              overwrite: 'auto'
+            });
+          },
+          onRefresh: function (self) {
+            if (self.progress > 0 || el.getBoundingClientRect().top <= window.innerHeight * 0.92) {
+              self.kill();
+              gsap.set(el, { clearProps: 'transform,opacity' });
+            }
           }
         });
       });
@@ -787,36 +984,50 @@
   function refresh() {
     if (global.ScrollTrigger) {
       global.ScrollTrigger.refresh();
+    } else if (stickyFallbackActive) {
+      initFallbackReveals();
     }
   }
 
-  function loadScript(src, timeoutMs) {
+  function loadScriptsOrdered(urls, timeoutMs) {
     return new Promise(function (resolve, reject) {
-      const s = document.createElement('script');
-      s.src = src;
-      s.async = true;
-      let done = false;
+      if (!urls || !urls.length) {
+        resolve();
+        return;
+      }
+
+      let settled = false;
+      let loadedCount = 0;
+
       const timer = window.setTimeout(function () {
-        if (!done) {
-          done = true;
-          reject(new Error('Script load timeout: ' + src));
+        if (!settled) {
+          settled = true;
+          reject(new Error('Script load timeout'));
         }
-      }, timeoutMs || 3000);
-      s.onload = function () {
-        if (!done) {
-          done = true;
-          window.clearTimeout(timer);
-          resolve();
-        }
-      };
-      s.onerror = function () {
-        if (!done) {
-          done = true;
-          window.clearTimeout(timer);
-          reject(new Error('Script load error: ' + src));
-        }
-      };
-      document.head.appendChild(s);
+      }, timeoutMs || 4500);
+
+      urls.forEach(function (src) {
+        const s = document.createElement('script');
+        s.src = src;
+        s.async = false;
+        s.crossOrigin = 'anonymous';
+        s.onload = function () {
+          loadedCount += 1;
+          if (!settled && loadedCount === urls.length) {
+            settled = true;
+            window.clearTimeout(timer);
+            resolve();
+          }
+        };
+        s.onerror = function () {
+          if (!settled) {
+            settled = true;
+            window.clearTimeout(timer);
+            reject(new Error('Script load error: ' + src));
+          }
+        };
+        document.head.appendChild(s);
+      });
     });
   }
 
@@ -842,21 +1053,25 @@
       return;
     }
 
-    // Load GSAP + ScrollTrigger dynamically without blocking initial page/storefront render
-    loadScript('https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js', 3000)
+    // Activate sticky scroll choreography immediately so early scrolling never skips Hero-to-About
+    initStickyFallback();
+
+    // Load GSAP + ScrollTrigger in parallel while preserving execution order
+    loadScriptsOrdered(
+      [
+        'https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js',
+        'https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js'
+      ],
+      4500
+    )
       .then(function () {
-        return loadScript(
-          'https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js',
-          3000
-        );
-      })
-      .then(function () {
-        initSignatureScrollStage();
-        initSectionRevealsAndParallax();
+        if (global.gsap && global.ScrollTrigger) {
+          initSignatureScrollStage();
+          initSectionRevealsAndParallax();
+        }
       })
       .catch(function () {
-        // Offline / blocked-CDN graceful fallback preserves full diagonal scroll choreography
-        initStickyFallback();
+        // Offline / blocked-CDN graceful mode already active via initStickyFallback()
       });
   }
 

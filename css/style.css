@@ -567,8 +567,14 @@ ul {
 .showcase-stage {
   position: relative;
   width: 100%;
+  height: 285vh;
+  height: 285dvh;
   background: var(--bg-ivory);
   overflow-anchor: none;
+}
+
+.showcase-stage.has-gsap-pin {
+  height: auto;
 }
 
 .anchor-point {
@@ -578,11 +584,12 @@ ul {
 }
 
 .stage-pin {
-  position: relative;
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 100vh;
   height: 100dvh;
-  min-height: 620px;
+  min-height: 540px;
   overflow: hidden;
   background: radial-gradient(
       circle at 78% 44%,
@@ -595,6 +602,11 @@ ul {
       rgba(248, 245, 239, 0) 48%
     ),
     var(--bg-ivory);
+}
+
+.showcase-stage.has-gsap-pin .stage-pin {
+  position: relative;
+  top: auto;
 }
 
 .stage-backdrop {
@@ -1021,6 +1033,7 @@ ul {
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 832 / 1007;
   object-fit: contain;
   filter: drop-shadow(0 24px 36px rgba(56, 37, 31, 0.22));
   will-change: transform, opacity;
@@ -1044,9 +1057,10 @@ ul {
   pointer-events: none;
 }
 
-/* Sticky Fallback Stage when GSAP CDN is unavailable offline */
+/* Sticky Fallback Stage (matches GSAP pin travel 100dvh + 185% / 155% exactly) */
 .showcase-stage.is-sticky-fallback {
-  height: 275vh;
+  height: 285vh;
+  height: 285dvh;
 }
 
 .showcase-stage.is-sticky-fallback .stage-pin {
@@ -1055,9 +1069,28 @@ ul {
 }
 
 @media (max-width: 767px) {
+  .showcase-stage,
   .showcase-stage.is-sticky-fallback {
-    height: 245vh;
+    height: 255vh;
+    height: 255dvh;
   }
+
+  .showcase-stage.has-gsap-pin {
+    height: auto;
+  }
+}
+
+/* Scroll Reveal Fallback Transition Class */
+.reveal-on-scroll.reveal-pending {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.72s var(--transition-ease),
+    transform 0.72s var(--transition-ease);
+}
+
+.reveal-on-scroll.reveal-pending.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Reduced-Motion Safe Fallback Layout */
@@ -1070,8 +1103,16 @@ ul {
     animation: none;
   }
 
-  .showcase-stage.is-sticky-fallback {
+  .showcase-stage,
+  .showcase-stage.is-sticky-fallback,
+  .showcase-stage.has-gsap-pin {
     height: auto;
+  }
+
+  .reveal-on-scroll.reveal-pending {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   .stage-pin {

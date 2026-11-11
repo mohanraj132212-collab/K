@@ -13,10 +13,14 @@
   <!-- Google Fonts: Luxury Editorial Serif + Refined Geometric Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
   />
+  <link rel="preload" as="image" href="assets/images/hero-dress.png" />
+  <link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" crossorigin />
+  <link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" crossorigin />
 
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -547,6 +551,8 @@
                   src="assets/images/hero-dress.png"
                   alt="KAARIGAI Couture Gown"
                   class="pedestal-static-dress"
+                  width="832"
+                  height="1007"
                 />
               </div>
             </div>
@@ -605,6 +611,9 @@
               alt="KAARIGAI Champagne Gold and Ivory Embroidered Silk Couture Gown"
               class="signature-dress-img"
               id="signature-dress-img"
+              width="832"
+              height="1007"
+              fetchpriority="high"
             />
             <div class="dress-floor-shadow" id="dress-floor-shadow" aria-hidden="true"></div>
           </div>
