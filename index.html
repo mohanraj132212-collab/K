@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="KAARIGAI – Clothing for Women in Manapparai, Tamil Nadu. Luxury Indian women's fashion featuring Silk Sarees, Kurtis, Designer Dresses, Tops, and Ethnic Couture."
+  />
+  <title>KAARIGAI — Clothing for Women | Elegance Woven in Every Thread</title>
+  <link rel="icon" type="image/png" href="assets/logo/kaarigai-logo.png" />
+
+  <!-- Google Fonts: Luxury Editorial Serif + Refined Geometric Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Skip Link for Keyboard Accessibility -->
+  <a class="skip-link" href="#collections">Skip to Collections</a>
+
+  <!-- =====================================================================
+       SITE HEADER
+       ===================================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner container">
+      <a href="#home" class="brand-logo-link" aria-label="KAARIGAI – Clothing for Women Home">
+        <img
+          src="assets/logo/kaarigai-logo.png"
+          alt="KAARIGAI – Designing Elegance"
+          class="brand-logo-img"
+        />
+      </a>
+
+      <nav class="primary-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link is-active" data-nav="home">Home</a></li>
+          <li><a href="#collections" class="nav-link" data-nav="collections">Collections</a></li>
+          <li><a href="#about" class="nav-link" data-nav="about">About</a></li>
+          <li><a href="#contact" class="nav-link" data-nav="contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Search Icon Button -->
+        <button
+          type="button"
+          class="icon-btn"
+          id="open-search-btn"
+          aria-label="Search Collections"
+          aria-expanded="false"
+          aria-controls="search-bar-drawer"
+        >
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7.5" />
+            <path d="M20.5 20.5L16.4 16.4" />
+          </svg>
+        </button>
+
+        <!-- Wishlist Icon Button -->
+        <button
+          type="button"
+          class="icon-btn has-badge"
+          id="open-wishlist-btn"
+          aria-label="Open Wishlist"
+          aria-controls="wishlist-drawer"
+        >
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 20.4s-7.5-4.8-9.3-9.3C1.4 7.8 3.6 4.5 7.1 4.5c2.1 0 3.8 1.1 4.9 2.7 1.1-1.6 2.8-2.7 4.9-2.7 3.5 0 5.7 3.3 4.4 6.6-1.8 4.5-9.3 9.3-9.3 9.3z" />
+          </svg>
+          <span class="badge-count is-hidden" id="wishlist-badge">0</span>
+        </button>
+
+        <!-- User / Concierge Icon Button -->
+        <button
+          type="button"
+          class="icon-btn"
+          id="open-account-btn"
+          aria-label="Client Concierge and Saved Drafts"
+          aria-controls="account-modal"
+        >
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4.5 20.2c1.2-3.7 4.1-5.4 7.5-5.4s6.3 1.7 7.5 5.4" />
+          </svg>
+        </button>
+
+        <!-- Shopping Bag Icon Button -->
+        <button
+          type="button"
+          class="icon-btn bag-btn has-badge"
+          id="open-cart-btn"
+          aria-label="Open Shopping Bag"
+          aria-controls="cart-drawer"
+        >
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 7.5h12l1.2 13H4.8L6 7.5z" />
+            <path d="M9 7.5V6a3 3 0 0 1 6 0v1.5" />
+          </svg>
+          <span class="badge-count" id="cart-badge">0</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button
+          type="button"
+          class="icon-btn mobile-menu-btn"
+          id="open-mobile-menu-btn"
+          aria-label="Open Menu"
+          aria-expanded="false"
+          aria-controls="mobile-nav-drawer"
+        >
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16" />
+            <path d="M4 12h16" />
+            <path d="M4 17h12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Header Search Drop-down Bar -->
+    <div class="search-bar-drawer" id="search-bar-drawer" hidden>
+      <div class="container search-bar-inner">
+        <form class="header-search-form" id="header-search-form" role="search">
+          <svg class="icon-svg search-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7.5" />
+            <path d="M20.5 20.5L16.4 16.4" />
+          </svg>
+          <input
+            type="search"
+            id="header-search-input"
+            class="header-search-input"
+            placeholder="Search Silk Sarees, Kurtis, Dresses, Anarkalis..."
+            aria-label="Search Kaarigai products"
+          />
+          <button type="submit" class="btn btn-sm btn-primary">Search</button>
+          <button
+            type="button"
+            class="icon-btn"
+            id="close-search-btn"
+            aria-label="Close Search"
+          >
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+              <path d="M6 6l12 12" />
+              <path d="M18 6L6 18" />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-backdrop" id="mobile-nav-backdrop" hidden></div>
+  <aside
+    class="mobile-nav-drawer"
+    id="mobile-nav-drawer"
+    aria-label="Mobile Navigation"
+    aria-hidden="true"
+  >
+    <div class="mobile-nav-header">
+      <img
+        src="assets/logo/kaarigai-logo.png"
+        alt="KAARIGAI"
+        class="mobile-nav-logo"
+      />
+      <button
+        type="button"
+        class="icon-btn"
+        id="close-mobile-menu-btn"
+        aria-label="Close Menu"
+      >
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12" />
+          <path d="M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+
+    <nav class="mobile-nav-links" aria-label="Mobile Primary Links">
+      <a href="#home" class="mobile-nav-link" data-nav="home">Home</a>
+      <a href="#collections" class="mobile-nav-link" data-nav="collections">Collections</a>
+      <a href="#about" class="mobile-nav-link" data-nav="about">About</a>
+      <a href="#contact" class="mobile-nav-link" data-nav="contact">Contact</a>
+    </nav>
+
+    <div class="mobile-nav-categories">
+      <p class="mobile-nav-eyebrow">Quick Categories</p>
+      <div class="mobile-cat-grid">
+        <button type="button" class="mobile-cat-chip" data-quick-cat="New Arrivals">New Arrivals</button>
+        <button type="button" class="mobile-cat-chip" data-quick-cat="Sarees">Sarees</button>
+        <button type="button" class="mobile-cat-chip" data-quick-cat="Kurtis">Kurtis</button>
+        <button type="button" class="mobile-cat-chip" data-quick-cat="Dresses">Dresses</button>
+        <button type="button" class="mobile-cat-chip" data-quick-cat="Tops">Tops</button>
+        <button type="button" class="mobile-cat-chip" data-quick-cat="Ethnic Wear">Ethnic Wear</button>
+      </div>
+    </div>
+
+    <div class="mobile-nav-footer">
+      <p class="mobile-store-label">Kaarigai Clothing for Women</p>
+      <p class="mobile-store-meta">Manapparai, Tamil Nadu • Open Daily 9:30 AM – 9:30 PM</p>
+    </div>
+  </aside>
+
+  <!-- =====================================================================
+       MAIN EXPERIENCE
+       ===================================================================== -->
+  <main id="main-content">
+    <!-- ===================================================================
+         SIGNATURE 3D SCROLL STAGE: HERO -> RIGHT-TO-LEFT DRESS FLIGHT -> ABOUT
+         =================================================================== -->
+    <section
+      id="hero-about-stage"
+      class="showcase-stage"
+      aria-label="KAARIGAI Signature Showcase and Story"
+    >
+      <span id="home" class="anchor-point" aria-hidden="true"></span>
+
+      <div class="stage-pin" id="stage-pin">
+        <!-- Subtle Luxury Decorative Backdrop -->
+        <div class="stage-backdrop" aria-hidden="true">
+          <div class="stage-aura stage-aura-right"></div>
+          <div class="stage-aura stage-aura-left"></div>
+
+          <!-- First-Page Luxury Couture Background (Champagne Lighting, Silk Texture & Indian Ornamental Filigree) -->
+          <div class="hero-luxury-backdrop" id="hero-luxury-backdrop">
+            <div class="hero-lighting-wash"></div>
+            <div class="hero-silk-sheen"></div>
+            <div class="hero-silk-weave"></div>
+
+            <svg
+              class="hero-ornamental-svg"
+              viewBox="0 0 1440 900"
+              fill="none"
+              preserveAspectRatio="xMidYMid slice"
+            >
+              <defs>
+                <!-- Soft Champagne Gold Line Gradients -->
+                <linearGradient id="heroGoldSweepA" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#C6A66B" stop-opacity="0" />
+                  <stop offset="32%" stop-color="#C6A66B" stop-opacity="0.34" />
+                  <stop offset="68%" stop-color="#B89554" stop-opacity="0.28" />
+                  <stop offset="100%" stop-color="#DFC79A" stop-opacity="0" />
+                </linearGradient>
+
+                <linearGradient id="heroGoldSweepB" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#DFC79A" stop-opacity="0" />
+                  <stop offset="45%" stop-color="#C6A66B" stop-opacity="0.3" />
+                  <stop offset="100%" stop-color="#C6A66B" stop-opacity="0" />
+                </linearGradient>
+
+                <linearGradient id="heroSilkWaveGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+                  <stop offset="0%" stop-color="#C6A66B" stop-opacity="0" />
+                  <stop offset="28%" stop-color="#DFC79A" stop-opacity="0.24" />
+                  <stop offset="72%" stop-color="#C6A66B" stop-opacity="0.2" />
+                  <stop offset="100%" stop-color="#E7D8BE" stop-opacity="0" />
+                </linearGradient>
+
+                <!-- Delicate Woven Brocade Buti Tile -->
+                <pattern id="kaanBrocadeButi" width="128" height="128" patternUnits="userSpaceOnUse">
+                  <!-- Center 4-petal zari diamond motif -->
+                  <path
+                    d="M 64 52 C 67 59, 69 61, 76 64 C 69 67, 67 69, 64 76 C 61 69, 59 67, 52 64 C 59 61, 61 59, 64 52 Z"
+                    stroke="#C6A66B"
+                    stroke-width="0.65"
+                    stroke-opacity="0.2"
+                    fill="#C6A66B"
+                    fill-opacity="0.045"
+                  />
+                  <circle cx="64" cy="64" r="1.35" fill="#B89554" fill-opacity="0.18" />
+                  <!-- Tiny corner seed dots (jaali rhythm) -->
+                  <circle cx="0" cy="0" r="1.1" fill="#C6A66B" fill-opacity="0.16" />
+                  <circle cx="128" cy="0" r="1.1" fill="#C6A66B" fill-opacity="0.16" />
+                  <circle cx="0" cy="128" r="1.1" fill="#C6A66B" fill-opacity="0.16" />
+                  <circle cx="128" cy="128" r="1.1" fill="#C6A66B" fill-opacity="0.16" />
+                  <!-- Whisper-thin diamond lattice hairline -->
+                  <path
+                    d="M 64 0 L 128 64 L 64 128 L 0 64 Z"
+                    stroke="#C6A66B"
+                    stroke-width="0.4"
+                    stroke-opacity="0.09"
+                  />
+                </pattern>
+
+                <!-- Soft Radial Vignette Keeping Heading, Header & Dress Crisp -->
+                <radialGradient id="heroButiMaskGrad" cx="56%" cy="49%" r="54%">
+                  <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.16" />
+                  <stop offset="44%" stop-color="#FFFFFF" stop-opacity="0.52" />
+                  <stop offset="80%" stop-color="#FFFFFF" stop-opacity="0.88" />
+                  <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.08" />
+                </radialGradient>
+                <mask id="heroBrocadeMask">
+                  <rect x="28" y="92" width="1384" height="780" rx="18" fill="url(#heroButiMaskGrad)" />
+                </mask>
+
+                <radialGradient id="heroMandalaFade" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45" />
+                  <stop offset="56%" stop-color="#FFFFFF" stop-opacity="0.95" />
+                  <stop offset="86%" stop-color="#FFFFFF" stop-opacity="0.55" />
+                  <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+                </radialGradient>
+                <mask id="heroMandalaMask">
+                  <circle cx="0" cy="0" r="340" fill="url(#heroMandalaFade)" />
+                </mask>
+
+                <!-- Reusable Heritage Lotus Petal + Inner Filigree -->
+                <g id="heroLotusPetal">
+                  <path
+                    d="M 0 -92 C 25 -124, 30 -164, 0 -198 C -30 -164, -25 -124, 0 -92 Z"
+                    stroke="#B89554"
+                    stroke-width="0.75"
+                  />
+                  <path
+                    d="M 0 -106 C 14 -130, 16 -156, 0 -177 C -16 -156, -14 -130, 0 -106 Z"
+                    stroke="#C6A66B"
+                    stroke-width="0.55"
+                    stroke-opacity="0.72"
+                  />
+                  <path d="M 0 -100 L 0 -186" stroke="#C6A66B" stroke-width="0.45" stroke-opacity="0.55" />
+                </g>
+
+                <!-- Reusable Interstitial Scalloped Kairi (Paisley) Bud -->
+                <g id="heroPaisleyBud">
+                  <path
+                    d="M 0 -202 C 12 -218, 13 -236, 0 -248 C -13 -236, -12 -218, 0 -202 Z"
+                    stroke="#C6A66B"
+                    stroke-width="0.65"
+                  />
+                  <circle cx="0" cy="-226" r="1.7" fill="#C6A66B" fill-opacity="0.65" />
+                  <circle cx="0" cy="-255" r="1.2" fill="#B89554" fill-opacity="0.55" />
+                </g>
+              </defs>
+
+              <!-- 1. Ultra-subtle Heritage Silk Brocade Micro-Pattern -->
+              <rect
+                width="1440"
+                height="900"
+                fill="url(#kaanBrocadeButi)"
+                mask="url(#heroBrocadeMask)"
+              />
+
+              <!-- 2. Delicate Silk Drape Flow Curves -->
+              <g opacity="0.72">
+                <path
+                  d="M -60 660 C 210 560, 420 715, 740 590 C 1020 480, 1210 610, 1510 475"
+                  stroke="url(#heroSilkWaveGrad)"
+                  stroke-width="1.15"
+                />
+                <path
+                  d="M -60 682 C 225 588, 435 738, 755 614 C 1035 505, 1225 632, 1510 498"
+                  stroke="url(#heroSilkWaveGrad)"
+                  stroke-width="0.65"
+                  stroke-opacity="0.65"
+                />
+                <path
+                  d="M -40 245 C 240 165, 460 280, 760 185 C 1030 100, 1245 215, 1500 135"
+                  stroke="url(#heroSilkWaveGrad)"
+                  stroke-width="0.95"
+                  stroke-opacity="0.65"
+                />
+                <path
+                  d="M -40 264 C 245 186, 468 298, 768 206 C 1038 122, 1250 232, 1500 156"
+                  stroke="url(#heroSilkWaveGrad)"
+                  stroke-width="0.55"
+                  stroke-opacity="0.5"
+                />
+              </g>
+
+              <!-- 3. Gossamer Champagne-Gold Artistic Sweeping Threads -->
+              <g opacity="0.85">
+                <path
+                  d="M 110 825 C 330 695, 515 745, 740 535 C 930 358, 1110 215, 1365 255"
+                  stroke="url(#heroGoldSweepA)"
+                  stroke-width="1.1"
+                />
+                <path
+                  d="M 165 842 C 365 718, 540 755, 756 552 C 942 378, 1118 240, 1350 278"
+                  stroke="url(#heroGoldSweepA)"
+                  stroke-width="0.55"
+                  stroke-dasharray="4 7"
+                />
+                <path
+                  d="M 1295 140 C 1100 175, 955 110, 760 210 C 570 308, 390 190, 145 268"
+                  stroke="url(#heroGoldSweepB)"
+                  stroke-width="0.85"
+                />
+              </g>
+
+              <!-- 4. Heritage Lotus & Zari Halo Mandala Behind Right Couture Gown -->
+              <g transform="translate(1122, 412)" mask="url(#heroMandalaMask)" opacity="0.28">
+                <circle cx="0" cy="0" r="62" stroke="#C6A66B" stroke-width="0.65" />
+                <circle cx="0" cy="0" r="88" stroke="#B89554" stroke-width="0.75" />
+                <circle cx="0" cy="0" r="204" stroke="#C6A66B" stroke-width="0.55" stroke-dasharray="2 5" />
+                <circle cx="0" cy="0" r="264" stroke="#B89554" stroke-width="0.75" />
+                <circle cx="0" cy="0" r="276" stroke="#C6A66B" stroke-width="0.5" stroke-dasharray="1.5 8" stroke-linecap="round" />
+                <circle cx="0" cy="0" r="316" stroke="#C6A66B" stroke-width="0.45" stroke-dasharray="3 12" />
+
+                <!-- 12 Sacred Lotus Petals -->
+                <use href="#heroLotusPetal" transform="rotate(0)" />
+                <use href="#heroLotusPetal" transform="rotate(30)" />
+                <use href="#heroLotusPetal" transform="rotate(60)" />
+                <use href="#heroLotusPetal" transform="rotate(90)" />
+                <use href="#heroLotusPetal" transform="rotate(120)" />
+                <use href="#heroLotusPetal" transform="rotate(150)" />
+                <use href="#heroLotusPetal" transform="rotate(180)" />
+                <use href="#heroLotusPetal" transform="rotate(210)" />
+                <use href="#heroLotusPetal" transform="rotate(240)" />
+                <use href="#heroLotusPetal" transform="rotate(270)" />
+                <use href="#heroLotusPetal" transform="rotate(300)" />
+                <use href="#heroLotusPetal" transform="rotate(330)" />
+
+                <!-- 12 Interstitial Kairi Buds -->
+                <use href="#heroPaisleyBud" transform="rotate(15)" />
+                <use href="#heroPaisleyBud" transform="rotate(45)" />
+                <use href="#heroPaisleyBud" transform="rotate(75)" />
+                <use href="#heroPaisleyBud" transform="rotate(105)" />
+                <use href="#heroPaisleyBud" transform="rotate(135)" />
+                <use href="#heroPaisleyBud" transform="rotate(165)" />
+                <use href="#heroPaisleyBud" transform="rotate(195)" />
+                <use href="#heroPaisleyBud" transform="rotate(225)" />
+                <use href="#heroPaisleyBud" transform="rotate(255)" />
+                <use href="#heroPaisleyBud" transform="rotate(285)" />
+                <use href="#heroPaisleyBud" transform="rotate(315)" />
+                <use href="#heroPaisleyBud" transform="rotate(345)" />
+              </g>
+
+              <!-- 5. Soft Secondary Mandala Crest Behind Center Heading -->
+              <g transform="translate(650, 392)" opacity="0.14">
+                <circle cx="0" cy="0" r="142" stroke="#C6A66B" stroke-width="0.55" stroke-dasharray="2 8" />
+                <circle cx="0" cy="0" r="186" stroke="#C6A66B" stroke-width="0.45" />
+                <path d="M -230 0 L -196 0 M 196 0 L 230 0" stroke="#C6A66B" stroke-width="0.65" />
+                <circle cx="-190" cy="0" r="1.8" fill="#C6A66B" />
+                <circle cx="190" cy="0" r="1.8" fill="#C6A66B" />
+              </g>
+
+              <!-- 6. Delicate Indian Botanical Vines & Architectural Corner Brackets -->
+              <g stroke="#B89554" stroke-linecap="round" opacity="0.28">
+                <!-- Top-Left Atelier Corner Arch & Floral Bel Vine -->
+                <path d="M 42 156 L 42 110 C 42 103, 47 98, 54 98 L 106 98" stroke-width="0.85" />
+                <path d="M 52 146 L 52 114 C 52 110, 55 107, 59 107 L 96 107" stroke-width="0.55" stroke-opacity="0.7" />
+                <path d="M 58 112 C 110 116, 152 146, 204 134 C 242 125, 274 148, 304 138" stroke-width="0.8" />
+                <path d="M 106 122 C 118 106, 134 104, 142 116 C 128 122, 116 124, 106 122 Z" stroke-width="0.65" />
+                <path d="M 164 137 C 176 150, 194 152, 202 140 C 188 136, 175 135, 164 137 Z" stroke-width="0.65" />
+                <path d="M 244 135 C 254 120, 270 118, 276 130 C 264 135, 254 136, 244 135 Z" stroke-width="0.65" />
+                <path d="M 60 114 C 72 154, 58 196, 82 238 C 94 258, 86 286, 98 308" stroke-width="0.75" />
+                <path d="M 68 172 C 86 168, 96 178, 88 192 C 76 188, 70 180, 68 172 Z" stroke-width="0.65" />
+                <circle cx="310" cy="136" r="2" fill="#C6A66B" stroke="none" />
+                <circle cx="101" cy="314" r="1.8" fill="#C6A66B" stroke="none" />
+
+                <!-- Top-Right Corner Flourish -->
+                <path d="M 1398 156 L 1398 110 C 1398 103, 1393 98, 1386 98 L 1334 98" stroke-width="0.85" />
+                <path d="M 1388 146 L 1388 114 C 1388 110, 1385 107, 1381 107 L 1344 107" stroke-width="0.55" stroke-opacity="0.7" />
+                <path d="M 1382 114 C 1340 120, 1312 142, 1266 132" stroke-width="0.75" />
+                <circle cx="1260" cy="131" r="1.8" fill="#C6A66B" stroke="none" />
+
+                <!-- Bottom-Left Subtle Corner Flourish -->
+                <path d="M 42 802 L 42 848 C 42 855, 47 860, 54 860 L 106 860" stroke-width="0.85" />
+                <path d="M 52 812 L 52 844 C 52 848, 55 851, 59 851 L 96 851" stroke-width="0.55" stroke-opacity="0.7" />
+
+                <!-- Bottom-Right Botanical Bel Vine & Corner Arch -->
+                <path d="M 1398 802 L 1398 848 C 1398 855, 1393 860, 1386 860 L 1334 860" stroke-width="0.85" />
+                <path d="M 1388 812 L 1388 844 C 1388 848, 1385 851, 1381 851 L 1344 851" stroke-width="0.55" stroke-opacity="0.7" />
+                <path d="M 1382 846 C 1330 842, 1290 812, 1238 824 C 1202 832, 1172 810, 1142 820" stroke-width="0.8" />
+                <path d="M 1334 836 C 1322 852, 1306 854, 1298 842 C 1312 836, 1324 834, 1334 836 Z" stroke-width="0.65" />
+                <path d="M 1276 821 C 1264 808, 1246 806, 1238 818 C 1252 822, 1265 823, 1276 821 Z" stroke-width="0.65" />
+                <circle cx="1136" cy="822" r="2" fill="#C6A66B" stroke="none" />
+              </g>
+            </svg>
+          </div>
+
+          <div class="stage-atelier-frame"></div>
+
+          <!-- Decorative Golden Thread Curve inspired by the KAARIGAI Logo -->
+          <svg
+            class="signature-thread-svg"
+            viewBox="0 0 1440 800"
+            fill="none"
+            preserveAspectRatio="none"
+          >
+            <path
+              id="signature-thread-path"
+              d="M 1180 220 C 980 140, 820 520, 620 420 C 440 330, 320 180, 180 340 C 110 420, 190 610, 390 620"
+              stroke="url(#goldThreadGrad)"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+            <defs>
+              <linearGradient id="goldThreadGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#C6A66B" stop-opacity="0.15" />
+                <stop offset="50%" stop-color="#C6A66B" stop-opacity="0.6" />
+                <stop offset="100%" stop-color="#D9A5A5" stop-opacity="0.25" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- LAYER 1: HERO EDITORIAL VIEW -->
+        <div class="hero-layer container" id="hero-layer">
+          <div class="hero-center-band" id="hero-center-band">
+            <p class="hero-eyebrow" id="hero-eyebrow">
+              MANAPPARAI ATELIER • COUTURE FOR WOMEN
+            </p>
+
+            <!-- Monumental Centered Brand Name -->
+            <h1 class="hero-brand-wordmark" id="hero-wordmark">KAARIGAI</h1>
+          </div>
+
+          <div class="hero-lower-copy" id="hero-lower-copy">
+            <p class="hero-tagline">Elegance Woven in Every Thread.</p>
+
+            <div class="hero-cta-row">
+              <a href="#collections" class="btn btn-primary hero-cta" id="hero-explore-btn">
+                <span>Explore Collection</span>
+                <svg class="icon-svg btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14" />
+                  <path d="M13 6l6 6-6 6" />
+                </svg>
+              </a>
+
+              <a href="#about" class="hero-secondary-link">
+                <span>Discover Our Craft</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-scroll-cue" id="hero-scroll-cue" aria-hidden="true">
+            <span class="scroll-cue-label">Scroll to Unveil</span>
+            <span class="scroll-cue-line"></span>
+          </div>
+        </div>
+
+        <!-- LAYER 2: ABOUT SPLIT-LAYOUT VIEW (Revealed on RIGHT after dress reaches LEFT) -->
+        <div class="about-layer container" id="about-layer">
+          <span id="about" class="anchor-point-about" aria-hidden="true"></span>
+
+          <div class="about-split-grid">
+            <!-- LEFT: Architectural Arched Pedestal for Settled Dress -->
+            <div class="about-left-column">
+              <div class="about-pedestal-frame" id="about-pedestal">
+                <div class="pedestal-arch"></div>
+                <img
+                  src="assets/images/hero-dress.png"
+                  alt="KAARIGAI Couture Gown"
+                  class="pedestal-static-dress"
+                />
+              </div>
+            </div>
+
+            <!-- RIGHT: The Art of KAARIGAI -->
+            <div class="about-right-column" id="about-right-content">
+              <p class="section-eyebrow about-stagger">HERITAGE &amp; CRAFTSMANSHIP</p>
+              <h2 class="about-heading about-stagger">
+                The Art of <em>KAARIGAI</em>
+              </h2>
+
+              <p class="about-lead about-stagger">
+                A sanctuary of timeless Indian women’s fashion in the heart of Manapparai, where woven heirloom artistry meets effortless contemporary poise.
+              </p>
+
+              <p class="about-description about-stagger">
+                At <strong>Kaarigai Clothing for Women</strong>, every drape is curated with reverence for fabric, silhouette, and tactile detail—from luminous Kanjivaram silk sarees and chikankari kurtis to sculpted evening dresses and festive ethnic ensembles designed for moments you cherish.
+              </p>
+
+              <div class="about-pillars about-stagger">
+                <div class="about-pillar">
+                  <span class="pillar-title">Curated Silk &amp; Cotton</span>
+                  <span class="pillar-sub">Artisan-led Indian textiles</span>
+                </div>
+                <div class="about-pillar">
+                  <span class="pillar-title">Refined Silhouettes</span>
+                  <span class="pillar-sub">Tailored for grace &amp; comfort</span>
+                </div>
+                <div class="about-pillar">
+                  <span class="pillar-title">Manapparai Flagship</span>
+                  <span class="pillar-sub">Open daily, 9:30 AM – 9:30 PM</span>
+                </div>
+              </div>
+
+              <div class="about-actions about-stagger">
+                <button type="button" class="btn btn-primary" id="open-story-btn">
+                  <span>Explore Our Story</span>
+                  <svg class="icon-svg btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14" />
+                    <path d="M13 6l6 6-6 6" />
+                  </svg>
+                </button>
+                <a href="#collections" class="btn btn-outline">
+                  <span>View Collections</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIGNATURE ANIMATED 3D DRESS (Starts RIGHT -> Glides LEFT with 3D rotation & zoom) -->
+        <div class="dress-flight-anchor" id="dress-flight-anchor">
+          <div class="dress-3d-tilt" id="dress-3d-tilt">
+            <img
+              src="assets/images/hero-dress.png"
+              alt="KAARIGAI Champagne Gold and Ivory Embroidered Silk Couture Gown"
+              class="signature-dress-img"
+              id="signature-dress-img"
+            />
+            <div class="dress-floor-shadow" id="dress-floor-shadow" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SHOPPING COLLECTIONS
+         =================================================================== -->
+    <section id="collections" class="collections-section section-spacing">
+      <div class="container">
+        <div class="section-header-row reveal-on-scroll">
+          <div>
+            <p class="section-eyebrow">CURATED WARDROBE</p>
+            <h2 class="section-title">The Seasonal Collections</h2>
+          </div>
+          <p class="section-subtitle">
+            Explore silk sarees, handcrafted kurtis, modern dresses, embroidered tops, and festive ethnic ensembles curated for the contemporary woman.
+          </p>
+        </div>
+
+        <!-- Explicit Sample Data / Demo Inventory Disclosure -->
+        <div class="demo-notice-banner reveal-on-scroll" role="note">
+          <span class="demo-pill">Sample Demo Catalogue</span>
+          <p>
+            Featured styles, sample INR pricing, sizes, and colour options are curated demo placeholders awaiting final store inventory from Kaarigai Clothing for Women.
+          </p>
+        </div>
+
+        <!-- Interactive Category & Filter Bar -->
+        <div class="collection-toolbar reveal-on-scroll">
+          <div
+            class="category-tabs"
+            id="category-tabs"
+            role="tablist"
+            aria-label="Product Categories"
+          >
+            <!-- Rendered cleanly by main.js from KAARIGAI_CATALOG.CATEGORIES -->
+          </div>
+
+          <div class="collection-controls">
+            <div class="inline-search-wrap">
+              <svg class="icon-svg inline-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7.5" />
+                <path d="M20.5 20.5L16.4 16.4" />
+              </svg>
+              <input
+                type="search"
+                id="collection-search-input"
+                class="collection-search-input"
+                placeholder="Filter by style or fabric..."
+                aria-label="Filter collection products"
+              />
+            </div>
+
+            <button
+              type="button"
+              class="filter-wishlist-btn"
+              id="toggle-wishlist-filter"
+              aria-pressed="false"
+            >
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 20.4s-7.5-4.8-9.3-9.3C1.4 7.8 3.6 4.5 7.1 4.5c2.1 0 3.8 1.1 4.9 2.7 1.1-1.6 2.8-2.7 4.9-2.7 3.5 0 5.7 3.3 4.4 6.6-1.8 4.5-9.3 9.3-9.3 9.3z" />
+              </svg>
+              <span>Saved</span>
+            </button>
+
+            <label class="sr-only" for="collection-sort-select">Sort products</label>
+            <select id="collection-sort-select" class="collection-sort-select">
+              <option value="featured">Sort: Featured</option>
+              <option value="newest">Sort: New Arrivals</option>
+              <option value="price-asc">Sample Price: Low to High</option>
+              <option value="price-desc">Sample Price: High to Low</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="results-meta-bar">
+          <span id="results-count-label">Showing 12 curated sample pieces</span>
+        </div>
+
+        <!-- Product Cards Grid -->
+        <div class="products-grid" id="products-grid">
+          <!-- Populated dynamically by main.js -->
+        </div>
+
+        <!-- Empty Search / Filter State -->
+        <div class="empty-results-state" id="empty-results-state" hidden>
+          <h3>No matching garments found</h3>
+          <p>Try clearing your filter or switching categories to view our full curated showcase.</p>
+          <button type="button" class="btn btn-primary" id="reset-filters-btn">
+            Show All Collections
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         EDITORIAL ATELIER INTERLUDE
+         =================================================================== -->
+    <section class="atelier-band" aria-label="KAARIGAI Boutique Experience">
+      <div class="container atelier-band-grid">
+        <div class="atelier-band-card reveal-on-scroll">
+          <span class="atelier-num">01</span>
+          <h3>Heirloom Textiles</h3>
+          <p>Kanjivaram brocades, Chanderi cotton-silks, sheer organzas, and hand-embroidered ensembles selected for lasting elegance.</p>
+        </div>
+        <div class="atelier-band-card reveal-on-scroll">
+          <span class="atelier-num">02</span>
+          <h3>Thoughtful Silhouettes</h3>
+          <p>Flattering proportions tailored across sarees, everyday kurtis, contemporary dresses, and celebratory ethnic sets.</p>
+        </div>
+        <div class="atelier-band-card reveal-on-scroll">
+          <span class="atelier-num">03</span>
+          <h3>Manapparai Styling</h3>
+          <p>Visit our flagship boutique near Kamarajar Silai for personal drape guidance and in-store collection previews daily.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         STORE INFORMATION & CONTACT SECTION
+         =================================================================== -->
+    <section id="contact" class="contact-section section-spacing">
+      <div class="container">
+        <div class="section-header-row reveal-on-scroll">
+          <div>
+            <p class="section-eyebrow">VISIT THE BOUTIQUE</p>
+            <h2 class="section-title">Kaarigai Clothing for Women</h2>
+          </div>
+          <p class="section-subtitle">
+            Experience our collections in person at our Manapparai flagship store or send a styling enquiry below.
+          </p>
+        </div>
+
+        <div class="contact-split-grid">
+          <!-- Left: Store Image + Official Store Details -->
+          <div class="store-info-card reveal-on-scroll">
+            <div class="store-photo-wrap parallax-frame">
+              <img
+                src="assets/images/atelier-story.jpg"
+                alt="Interior of Kaarigai Clothing for Women boutique featuring draped silk sarees and brass racks"
+                class="store-photo"
+                loading="lazy"
+              />
+              <span class="store-photo-badge">Manapparai Flagship</span>
+            </div>
+
+            <div class="store-details-body">
+              <div class="store-about-block">
+                <h3>About the Store</h3>
+                <p>
+                  Welcome to <strong>Kaarigai Clothing for Women</strong> — a warm, attentive womenswear destination bringing together classic Tamil Nadu weaves, festive occasionwear, and effortless everyday silhouettes under one roof.
+                </p>
+              </div>
+
+              <div class="store-meta-list">
+                <div class="store-meta-item">
+                  <span class="meta-icon-wrap" aria-hidden="true">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 1 1 13 0c0 5.4-6.5 11-6.5 11z" />
+                      <circle cx="12" cy="10" r="2.3" />
+                    </svg>
+                  </span>
+                  <div>
+                    <strong>Boutique Address</strong>
+                    <p>
+                      1st Floor, PPS Palamudir Cholai, Kovilpatti Rd, near Kamarajar Silai, Manapparai, Tamil Nadu 621306
+                    </p>
+                  </div>
+                </div>
+
+                <div class="store-meta-item">
+                  <span class="meta-icon-wrap" aria-hidden="true">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M12 7v5l3.2 2" />
+                    </svg>
+                  </span>
+                  <div>
+                    <strong>Opening Hours</strong>
+                    <p>9:30 AM – 9:30 PM, every day</p>
+                  </div>
+                </div>
+
+                <div class="store-meta-item">
+                  <span class="meta-icon-wrap" aria-hidden="true">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20.5 11.8a8.5 8.5 0 0 1-12.5 7.5L4 20.5l1.2-3.9A8.5 8.5 0 1 1 20.5 11.8z" />
+                      <path d="M9.3 8.8c.2-.5.5-.5.8-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.2.1.5-.1.7l-.5.6c-.1.1-.2.3-.1.5.4.8 1.2 1.6 2 2 .2.1.4 0 .5-.1l.6-.5c.2-.2.5-.2.7-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3 0 .6-.5.8-.5.2-1.5.4-3.1-.3-1.6-.7-3.4-2.5-4.1-4.1-.7-1.6-.5-2.6-.3-3.1z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <strong>WhatsApp Concierge (Placeholder)</strong>
+                    <p>Direct WhatsApp number pending store connection — click below to preview a boutique enquiry message.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="store-action-buttons">
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=1st+Floor+PPS+Palamudir+Cholai+Kovilpatti+Rd+near+Kamarajar+Silai+Manapparai+Tamil+Nadu+621306"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-primary"
+                >
+                  <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 1 1 13 0c0 5.4-6.5 11-6.5 11z" />
+                    <circle cx="12" cy="10" r="2.3" />
+                  </svg>
+                  <span>Open in Google Maps</span>
+                  <svg class="icon-svg btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14" />
+                    <path d="M13 6l6 6-6 6" />
+                  </svg>
+                </a>
+
+                <button
+                  type="button"
+                  class="btn btn-outline whatsapp-placeholder-trigger"
+                >
+                  <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20.5 11.8a8.5 8.5 0 0 1-12.5 7.5L4 20.5l1.2-3.9A8.5 8.5 0 1 1 20.5 11.8z" />
+                    <path d="M9.3 8.8c.2-.5.5-.5.8-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.2.1.5-.1.7l-.5.6c-.1.1-.2.3-.1.5.4.8 1.2 1.6 2 2 .2.1.4 0 .5-.1l.6-.5c.2-.2.5-.2.7-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3 0 .6-.5.8-.5.2-1.5.4-3.1-.3-1.6-.7-3.4-2.5-4.1-4.1-.7-1.6-.5-2.6-.3-3.1z" />
+                  </svg>
+                  <span>WhatsApp Placeholder</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Boutique Enquiry & Styling Request Form -->
+          <div class="contact-form-card reveal-on-scroll">
+            <p class="section-eyebrow">PERSONAL STYLING &amp; ENQUIRIES</p>
+            <h3 class="contact-form-title">Connect With Our Atelier</h3>
+            <p class="contact-form-subtitle">
+              Planning a bridal trousseau visit, checking saree availability, or booking a private styling session? Draft a boutique message below.
+            </p>
+
+            <form id="contact-enquiry-form" class="luxury-form" novalidate>
+              <div class="form-group">
+                <label for="contact-name">Your Name <span class="req">*</span></label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  name="name"
+                  placeholder="Enter your full name"
+                  required
+                />
+              </div>
+
+              <div class="form-row-two">
+                <div class="form-group">
+                  <label for="contact-interest">Collection Interest</label>
+                  <select id="contact-interest" name="interest">
+                    <option value="Silk Sarees">Silk Sarees &amp; Bridal</option>
+                    <option value="Kurtis & Dailywear">Kurtis &amp; Daily Elegance</option>
+                    <option value="Dresses & Tops">Dresses &amp; Modern Tops</option>
+                    <option value="Ethnic Wear">Anarkalis &amp; Ethnic Sets</option>
+                    <option value="Boutique Visit">Store Visit / General Query</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="contact-visit-time">Preferred Visit Window</label>
+                  <select id="contact-visit-time" name="visitTime">
+                    <option value="Morning (9:30 AM – 1:00 PM)">Morning (9:30 AM – 1:00 PM)</option>
+                    <option value="Afternoon (1:00 PM – 5:00 PM)">Afternoon (1:00 PM – 5:00 PM)</option>
+                    <option value="Evening (5:00 PM – 9:30 PM)">Evening (5:00 PM – 9:30 PM)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message">Your Message <span class="req">*</span></label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows="4"
+                  placeholder="Tell us about the occasion, fabric preference, or sizing question..."
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-full">
+                <span>Prepare Store Enquiry</span>
+                <svg class="icon-svg btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14" />
+                  <path d="M13 6l6 6-6 6" />
+                </svg>
+              </button>
+
+              <p class="form-helper-note">
+                No phone number is invented or transmitted to an external server in this frontend showcase.
+              </p>
+
+              <div class="form-feedback-box" id="contact-form-feedback" hidden></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       FOOTER
+       ===================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand-col">
+        <div class="footer-logo-medallion">
+          <img
+            src="assets/logo/kaarigai-logo.png"
+            alt="KAARIGAI – Designing Elegance"
+            class="footer-logo-img"
+          />
+        </div>
+        <p class="footer-tagline">
+          Elegance Woven in Every Thread. Curated Indian women’s clothing crafted for modern grace.
+        </p>
+        <div class="footer-socials">
+          <button
+            type="button"
+            class="social-icon-pill"
+            id="footer-instagram-btn"
+            aria-label="KAARIGAI Instagram Placeholder"
+          >
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
+            </svg>
+            <span>Instagram</span>
+          </button>
+
+          <button
+            type="button"
+            class="social-icon-pill whatsapp-placeholder-trigger"
+            aria-label="KAARIGAI WhatsApp Placeholder"
+          >
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.5 11.8a8.5 8.5 0 0 1-12.5 7.5L4 20.5l1.2-3.9A8.5 8.5 0 1 1 20.5 11.8z" />
+              <path d="M9.3 8.8c.2-.5.5-.5.8-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.2.1.5-.1.7l-.5.6c-.1.1-.2.3-.1.5.4.8 1.2 1.6 2 2 .2.1.4 0 .5-.1l.6-.5c.2-.2.5-.2.7-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3 0 .6-.5.8-.5.2-1.5.4-3.1-.3-1.6-.7-3.4-2.5-4.1-4.1-.7-1.6-.5-2.6-.3-3.1z" />
+            </svg>
+            <span>WhatsApp</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#home" data-nav="home">Home</a></li>
+          <li><a href="#collections" data-nav="collections">Collections</a></li>
+          <li><a href="#about" data-nav="about">About KAARIGAI</a></li>
+          <li><a href="#contact" data-nav="contact">Store &amp; Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Collections</h4>
+        <ul>
+          <li><button type="button" class="footer-cat-link" data-quick-cat="Sarees">Silk &amp; Organza Sarees</button></li>
+          <li><button type="button" class="footer-cat-link" data-quick-cat="Kurtis">Handcrafted Kurtis</button></li>
+          <li><button type="button" class="footer-cat-link" data-quick-cat="Dresses">Designer Dresses</button></li>
+          <li><button type="button" class="footer-cat-link" data-quick-cat="Tops">Embroidered Tops</button></li>
+          <li><button type="button" class="footer-cat-link" data-quick-cat="Ethnic Wear">Ethnic Wear</button></li>
+          <li><button type="button" class="footer-cat-link" data-quick-cat="New Arrivals">New Arrivals</button></li>
+        </ul>
+      </div>
+
+      <div class="footer-store-col">
+        <h4>Manapparai Boutique</h4>
+        <p class="footer-address">
+          Kaarigai Clothing for Women<br />
+          1st Floor, PPS Palamudir Cholai, Kovilpatti Rd, near Kamarajar Silai,<br />
+          Manapparai, Tamil Nadu 621306
+        </p>
+        <p class="footer-hours">
+          <strong>Hours:</strong> 9:30 AM – 9:30 PM, Every Day
+        </p>
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=1st+Floor+PPS+Palamudir+Cholai+Kovilpatti+Rd+near+Kamarajar+Silai+Manapparai+Tamil+Nadu+621306"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-map-link"
+        >
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 1 1 13 0c0 5.4-6.5 11-6.5 11z" />
+            <circle cx="12" cy="10" r="2.3" />
+          </svg>
+          <span>View Location on Google Maps</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; <span id="footer-year">2026</span> Kaarigai Clothing for Women. All rights reserved.</p>
+        <p class="footer-demo-note">Sample showcase catalogue &amp; Firebase-ready frontend demo.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       SLIDE-OVER SHOPPING BAG DRAWER
+       ===================================================================== -->
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+
+  <aside
+    class="side-drawer"
+    id="cart-drawer"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cart-drawer-title"
+    aria-hidden="true"
+  >
+    <div class="drawer-header">
+      <div>
+        <p class="drawer-eyebrow">YOUR SELECTION</p>
+        <h2 id="cart-drawer-title">Shopping Bag</h2>
+      </div>
+      <button type="button" class="icon-btn" data-close-drawer aria-label="Close Shopping Bag">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12" />
+          <path d="M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-body" id="cart-items-container">
+      <!-- Populated dynamically by main.js -->
+    </div>
+
+    <div class="drawer-footer" id="cart-drawer-footer">
+      <div class="cart-totals-rows">
+        <div class="cart-total-row">
+          <span>Sample Subtotal</span>
+          <strong id="cart-subtotal-val">₹0</strong>
+        </div>
+        <div class="cart-total-row subtle">
+          <span>Boutique Pickup / Delivery</span>
+          <span>Calculated at store confirmation</span>
+        </div>
+        <div class="cart-total-row grand">
+          <span>Estimated Total</span>
+          <strong id="cart-total-val">₹0</strong>
+        </div>
+      </div>
+
+      <p class="cart-demo-disclaimer">
+        Sample prices shown. Final billing &amp; stock confirmation occur upon store/backend integration.
+      </p>
+
+      <div class="drawer-actions-stack">
+        <button type="button" class="btn btn-primary btn-full" id="proceed-checkout-btn">
+          <span>Proceed to Checkout</span>
+          <svg class="icon-svg btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14" />
+            <path d="M13 6l6 6-6 6" />
+          </svg>
+        </button>
+        <button type="button" class="btn btn-text" id="clear-cart-btn">
+          Clear Shopping Bag
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- =====================================================================
+       SLIDE-OVER WISHLIST DRAWER
+       ===================================================================== -->
+  <aside
+    class="side-drawer"
+    id="wishlist-drawer"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="wishlist-drawer-title"
+    aria-hidden="true"
+  >
+    <div class="drawer-header">
+      <div>
+        <p class="drawer-eyebrow">SAVED PIECES</p>
+        <h2 id="wishlist-drawer-title">Your Wishlist</h2>
+      </div>
+      <button type="button" class="icon-btn" data-close-drawer aria-label="Close Wishlist">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12" />
+          <path d="M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-body" id="wishlist-items-container">
+      <!-- Populated dynamically -->
+    </div>
+  </aside>
+
+  <!-- =====================================================================
+       PRODUCT DETAILS MODAL (GALLERY, SIZES, COLOURS, QTY, BUY NOW, RELATED)
+       ===================================================================== -->
+  <div
+    class="modal-overlay"
+    id="product-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="pd-title"
+    hidden
+  >
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card modal-product-card">
+      <button type="button" class="icon-btn modal-close-btn" data-close-modal aria-label="Close Product Details">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12" />
+          <path d="M18 6L6 18" />
+        </svg>
+      </button>
+
+      <div class="pd-layout">
+        <!-- Multi-Image Gallery -->
+        <div class="pd-gallery">
+          <div class="pd-main-image-wrap" id="pd-zoom-stage">
+            <img
+              id="pd-main-image"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              alt="Selected KAARIGAI garment"
+              class="pd-main-image"
+            />
+            <span class="pd-demo-ribbon" id="pd-badge">Sample Demo</span>
+          </div>
+          <div class="pd-thumbnails" id="pd-thumbnails" role="list" aria-label="Product angles">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Product Configuration & Info -->
+        <div class="pd-info">
+          <div class="pd-top-row">
+            <span class="pd-category" id="pd-category"></span>
+            <button type="button" class="icon-btn pd-wishlist-btn" id="pd-wishlist-btn" aria-label="Save to Wishlist">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 20.4s-7.5-4.8-9.3-9.3C1.4 7.8 3.6 4.5 7.1 4.5c2.1 0 3.8 1.1 4.9 2.7 1.1-1.6 2.8-2.7 4.9-2.7 3.5 0 5.7 3.3 4.4 6.6-1.8 4.5-9.3 9.3-9.3 9.3z" />
+              </svg>
+            </button>
+          </div>
+
+          <h2 id="pd-title" class="pd-title"></h2>
+
+          <div class="pd-price-row">
+            <span class="pd-price" id="pd-price"></span>
+            <span class="pd-price-tag">Sample Price • Demo Inventory</span>
+          </div>
+
+          <p class="pd-description" id="pd-description"></p>
+
+          <div class="pd-specs">
+            <div><strong>Fabric:</strong> <span id="pd-fabric"></span></div>
+            <div><strong>Care:</strong> <span id="pd-care"></span></div>
+          </div>
+
+          <!-- Colour Selection -->
+          <div class="pd-option-block">
+            <div class="pd-option-label">
+              <span>Colour:</span>
+              <strong id="pd-selected-color-name"></strong>
+            </div>
+            <div class="pd-color-list" id="pd-color-list"></div>
+          </div>
+
+          <!-- Size Selection + Size Guide -->
+          <div class="pd-option-block">
+            <div class="pd-option-label-row">
+              <div class="pd-option-label">
+                <span>Size:</span>
+                <strong id="pd-selected-size-name"></strong>
+              </div>
+              <button type="button" class="size-guide-toggle" id="pd-size-guide-toggle">
+                Size Guide
+              </button>
+            </div>
+            <div class="pd-size-list" id="pd-size-list"></div>
+
+            <div class="pd-size-guide-panel" id="pd-size-guide-panel" hidden>
+              <p><strong>Sample Indian Women's Sizing Reference (Inches):</strong></p>
+              <p>XS: Bust 32 • S: Bust 34 • M: Bust 36 • L: Bust 38 • XL: Bust 40. Sarees include standard 5.5m drape + 0.8m unstitched blouse fabric.</p>
+            </div>
+          </div>
+
+          <!-- Quantity + Action Buttons -->
+          <div class="pd-actions-row">
+            <div class="qty-control" aria-label="Quantity selector">
+              <button type="button" class="qty-btn" id="pd-qty-minus" aria-label="Decrease quantity">
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+                  <path d="M5 12h14" />
+                </svg>
+              </button>
+              <span class="qty-value" id="pd-qty-value">1</span>
+              <button type="button" class="qty-btn" id="pd-qty-plus" aria-label="Increase quantity">
+                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+                  <path d="M12 5v14" />
+                  <path d="M5 12h14" />
+                </svg>
+              </button>
+            </div>
+
+            <button type="button" class="btn btn-outline pd-add-btn" id="pd-add-to-cart-btn">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="9" cy="20" r="1.4" />
+                <circle cx="18" cy="20" r="1.4" />
+                <path d="M2.5 3.5h2.4l2.4 11.2h11.3l2.2-7.5H6.2" />
+              </svg>
+              <span>Add to Cart</span>
+            </button>
+
+            <button type="button" class="btn btn-primary pd-buy-btn" id="pd-buy-now-btn">
+              <span>Buy Now</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Products -->
+      <div class="pd-related-section">
+        <div class="pd-related-header">
+          <h3>You May Also Adore</h3>
+          <span>Curated pairings from KAARIGAI</span>
+        </div>
+        <div class="pd-related-grid" id="pd-related-grid">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       CHECKOUT MODAL (FIREBASE-READY ARCHITECTURE & HONEST DEMO STATUS)
+       ===================================================================== -->
+  <div
+    class="modal-overlay"
+    id="checkout-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="checkout-title"
+    hidden
+  >
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card modal-checkout-card">
+      <button type="button" class="icon-btn modal-close-btn" data-close-modal aria-label="Close Checkout">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12" />
+          <path d="M18 6L6 18" />
+        </svg>
+      </button>
+
+      <div id="checkout-form-view">
+        <div class="checkout-header">
+          <p class="section-eyebrow">ORDER REQUEST &amp; FIREBASE-READY DRAFT</p>
+          <h2 id="checkout-title">Checkout Summary</h2>
+        </div>
+
+        <div class="checkout-grid">
+          <!-- Customer Form -->
+          <form id="checkout-form" class="luxury-form" novalidate>
+            <div class="form-group">
+              <label for="chk-name">Customer Name <span class="req">*</span></label>
+              <input type="text" id="chk-name" required placeholder="Full name" />
+            </div>
+
+            <div class="form-group">
+              <label for="chk-mobile">Mobile Number <span class="req">*</span></label>
+              <input
+                type="tel"
+                id="chk-mobile"
+                required
+                inputmode="numeric"
+                maxlength="14"
+                placeholder="10-digit mobile number for store callback"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="chk-address">Delivery Address <span class="req">*</span></label>
+              <textarea
+                id="chk-address"
+                rows="3"
+                required
+                placeholder="Door No., Street, Landmark"
+              ></textarea>
+            </div>
+
+            <div class="form-row-two">
+              <div class="form-group">
+                <label for="chk-city">City / Town <span class="req">*</span></label>
+                <input type="text" id="chk-city" required placeholder="e.g., Manapparai" />
+              </div>
+              <div class="form-group">
+                <label for="chk-pincode">Pincode <span class="req">*</span></label>
+                <input type="text" id="chk-pincode" required maxlength="6" inputmode="numeric" placeholder="621306" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Preferred Payment Method</label>
+              <div class="payment-method-options">
+                <label class="radio-card">
+                  <input type="radio" name="paymentMethod" value="Pay at Boutique (Manapparai Pickup)" checked />
+                  <span>
+                    <strong>Pay at Boutique (Manapparai Store)</strong>
+                    <small>Inspect fabric &amp; complete billing in person</small>
+                  </span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="paymentMethod" value="Cash on Delivery Request (Pending Store Verification)" />
+                  <span>
+                    <strong>Cash on Delivery Request</strong>
+                    <small>Confirmed only after boutique verification</small>
+                  </span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="paymentMethod" value="Online UPI / Card (Pending Gateway Integration)" />
+                  <span>
+                    <strong>Online UPI / Card (Future Integration)</strong>
+                    <small>No online charge is taken in this demo</small>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div class="checkout-honest-alert" role="note">
+              <strong>Important Notice:</strong> Submitting creates a local demo order request prepared for future Firebase Firestore &amp; payment verification. No live payment is processed and orders are not confirmed until verified by our backend/store team.
+            </div>
+
+            <div class="form-feedback-box is-error" id="checkout-error-box" hidden></div>
+
+            <button type="submit" class="btn btn-primary btn-full">
+              <span>Save Order Request Draft</span>
+              <svg class="icon-svg btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="M13 6l6 6-6 6" />
+              </svg>
+            </button>
+          </form>
+
+          <!-- Order Summary -->
+          <div class="checkout-summary-panel">
+            <h3>Selected Pieces</h3>
+            <div class="checkout-items-list" id="checkout-items-list"></div>
+
+            <div class="checkout-totals">
+              <div class="cart-total-row">
+                <span>Sample Subtotal</span>
+                <strong id="checkout-subtotal">₹0</strong>
+              </div>
+              <div class="cart-total-row subtle">
+                <span>Shipping &amp; Alterations</span>
+                <span>Pending store confirmation</span>
+              </div>
+              <div class="cart-total-row grand">
+                <span>Sample Estimate</span>
+                <strong id="checkout-total">₹0</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Honest Unconfirmed Draft Receipt State -->
+      <div id="checkout-draft-result" hidden>
+        <div class="draft-receipt-card">
+          <span class="demo-pill">Demo Request Saved • Not Yet Confirmed</span>
+          <h2>Order Request Draft Prepared</h2>
+          <p class="draft-receipt-lead">
+            Your selection has been saved locally in this browser with a Firebase-ready payload schema.
+            <strong>No online payment was processed, and this order is not confirmed</strong> until connected to a live backend/payment gateway or verified directly by Kaarigai Clothing for Women.
+          </p>
+
+          <div class="draft-meta-box" id="draft-meta-box"></div>
+
+          <div class="draft-actions">
+            <button type="button" class="btn btn-primary" id="copy-draft-btn">
+              <span>Copy Order Request Summary</span>
+            </button>
+            <button type="button" class="btn btn-outline whatsapp-placeholder-trigger">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20.5 11.8a8.5 8.5 0 0 1-12.5 7.5L4 20.5l1.2-3.9A8.5 8.5 0 1 1 20.5 11.8z" />
+              </svg>
+              <span>WhatsApp Placeholder Info</span>
+            </button>
+            <button type="button" class="btn btn-text" data-close-modal>
+              Return to Storefront
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       ATELIER STORY MODAL (Triggered by "Explore Our Story")
+       ===================================================================== -->
+  <div
+    class="modal-overlay"
+    id="story-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="story-modal-title"
+    hidden
+  >
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card modal-story-card">
+      <button type="button" class="icon-btn modal-close-btn" data-close-modal aria-label="Close Story">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12" />
+          <path d="M18 6L6 18" />
+        </svg>
+      </button>
+
+      <div class="story-modal-grid">
+        <div class="story-modal-media">
+          <img
+            src="assets/images/atelier-story.jpg"
+            alt="KAARIGAI Manapparai Luxury Boutique"
+            class="story-modal-img"
+          />
+        </div>
+        <div class="story-modal-copy">
+          <p class="section-eyebrow">OUR PHILOSOPHY</p>
+          <h2 id="story-modal-title">The Art of KAARIGAI</h2>
+          <p>
+            Derived from classic craft heritage, <strong>KAARIGAI</strong> celebrates the elegance of Indian women across generations—honoring rich handloom sarees alongside crisp everyday kurtis, breezy botanical dresses, and occasionwear.
+          </p>
+          <p>
+            Located at <strong>1st Floor, PPS Palamudir Cholai, Kovilpatti Rd, near Kamarajar Silai, Manapparai</strong>, our showroom welcomes guests every day from <strong>9:30 AM to 9:30 PM</strong> with unhurried personal styling.
+          </p>
+          <div class="story-modal-actions">
+            <a href="#collections" class="btn btn-primary" data-close-modal>
+              <span>Browse Curated Pieces</span>
+            </a>
+            <a href="#contact" class="btn btn-outline" data-close-modal>
+              <span>Plan Your Visit</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       CLIENT CONCIERGE / SAVED DRAFTS MODAL (User Icon)
+       ===================================================================== -->
+  <div
+    class="modal-overlay"
+    id="account-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="account-modal-title"
+    hidden
+  >
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card modal-compact-card">
+      <button type="button" class="icon-btn modal-close-btn" data-close-modal aria-label="Close Client Concierge">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12" />
+          <path d="M18 6L6 18" />
+        </svg>
+      </button>
+      <p class="section-eyebrow">CLIENT CONCIERGE</p>
+      <h2 id="account-modal-title">Saved Activity &amp; Draft Requests</h2>
+      <p class="modal-muted-copy">
+        Your shopping bag, wishlist, and demo order request drafts are saved locally in your browser via <code>localStorage</code> and structured for future Firebase authentication.
+      </p>
+      <div id="account-drafts-list" class="account-drafts-list"></div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       WHATSAPP CONTACT PLACEHOLDER MODAL (No Invented Phone Number)
+       ===================================================================== -->
+  <div
+    class="modal-overlay"
+    id="whatsapp-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="wa-modal-title"
+    hidden
+  >
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card modal-compact-card">
+      <button type="button" class="icon-btn modal-close-btn" data-close-modal aria-label="Close WhatsApp Info">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12" />
+          <path d="M18 6L6 18" />
+        </svg>
+      </button>
+      <p class="section-eyebrow">BOUTIQUE WHATSAPP PLACEHOLDER</p>
+      <h2 id="wa-modal-title">Direct WhatsApp Enquiry Pending Store Number</h2>
+      <p class="modal-muted-copy">
+        In accordance with verified store data, no phone number has been fabricated. Once Kaarigai Clothing for Women links their official WhatsApp Business number, this button will launch a direct chat pre-filled with your selected pieces.
+      </p>
+      <div class="wa-placeholder-box">
+        <strong>Store Visit Details (Verified):</strong>
+        <p>Kaarigai Clothing for Women • 1st Floor, PPS Palamudir Cholai, Kovilpatti Rd, near Kamarajar Silai, Manapparai, Tamil Nadu 621306</p>
+        <p>Open daily: 9:30 AM – 9:30 PM</p>
+      </div>
+      <div class="wa-modal-actions">
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=1st+Floor+PPS+Palamudir+Cholai+Kovilpatti+Rd+near+Kamarajar+Silai+Manapparai+Tamil+Nadu+621306"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary"
+        >
+          <span>Get Store Directions</span>
+        </a>
+        <button type="button" class="btn btn-outline" data-close-modal>
+          <span>Close</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Region -->
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Application Modules (Non-blocking; GSAP + ScrollTrigger loaded cleanly by animations.js) -->
+  <script defer src="js/products.js"></script>
+  <script defer src="js/cart.js"></script>
+  <script defer src="js/animations.js"></script>
+  <script defer src="js/main.js"></script>
+</body>
+</html>
